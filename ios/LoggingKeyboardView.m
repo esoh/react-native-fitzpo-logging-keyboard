@@ -9,7 +9,7 @@
 
 @implementation LoggingKeyboardView
 
-@synthesize textView = _textView;
+@synthesize textView;
 
 - (id)init {
   if(self = [super initWithFrame:CGRectMake(0, 0, 500, 400)])
@@ -27,6 +27,7 @@
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
   NSLog(@"BUTTON PRESS %@", character);
+  [(UITextView *)textView setText:@"PLEASE WORK"];
   //[_textView replaceRange:_textView.selectedTextRange withText:character];
 }
 
