@@ -31,6 +31,11 @@
   //[_textView replaceRange:_textView.selectedTextRange withText:character];
 }
 
+- (IBAction)hideInputView:(id)sender {
+  [(UITextView *)textView resignFirstResponder];
+  //maybe implement callback too?
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
