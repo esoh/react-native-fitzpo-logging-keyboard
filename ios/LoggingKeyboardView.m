@@ -9,12 +9,28 @@
 
 @implementation LoggingKeyboardView
 
+@synthesize textView = _textView;
+
 - (id)init {
-  //self = [super initWithFrame:CGRectMake(0, 0, 100, 200)];
-  NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
-  NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
-  self = [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] lastObject];
+  if(self = [super initWithFrame:CGRectMake(0, 0, 500, 400)])
+  {
+    NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
+    NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
+    UIView* keyboardView= [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] objectAtIndex:0];
+    [self addSubview:keyboardView];
+  }
   return self;
+}
+
+- (IBAction)characterPressed:(id)sender {
+  UIButton *button = (UIButton *)sender;
+  NSString *character = [NSString stringWithString:button.titleLabel.text];
+
+  [_textView insertText:character];
+}
+
+- (void)doSomething {
+  NSLog(@"AAAAAAAAAAAAAAAAAAAAA");
 }
 
 /*
