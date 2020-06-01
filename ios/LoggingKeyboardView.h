@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (IBAction)characterPressed:(id)sender;
 
-- (void) doSomething;
-
 @end
 
 NS_ASSUME_NONNULL_END

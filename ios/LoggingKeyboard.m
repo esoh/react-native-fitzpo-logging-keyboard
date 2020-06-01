@@ -35,7 +35,7 @@ RCT_EXPORT_METHOD( hijackInput:(nonnull NSNumber *)reactTag callback:(RCTRespons
 
   UITextView* textView = (UITextView*)view.backedTextInputView;
   [textView setInputView:inputView];
-  [inputView doSomething];
+  [inputView setTextView:textView];
   [textView reloadInputViews];
 
   callback(@[[NSString stringWithFormat: @"reactTag: %@", reactTag]]);

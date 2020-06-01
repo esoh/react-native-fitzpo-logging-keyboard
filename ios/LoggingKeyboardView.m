@@ -26,11 +26,8 @@
   UIButton *button = (UIButton *)sender;
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
+  NSLog(@"BUTTON PRESS %@", character);
   [_textView insertText:character];
-}
-
-- (void)doSomething {
-  NSLog(@"AAAAAAAAAAAAAAAAAAAAA");
 }
 
 /*
