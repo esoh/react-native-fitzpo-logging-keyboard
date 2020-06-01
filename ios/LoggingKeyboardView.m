@@ -10,6 +10,7 @@
 @implementation LoggingKeyboardView
 
 @synthesize textView;
+@synthesize delegate;
 
 - (id)init {
   if(self = [super initWithFrame:CGRectMake(0, 0, 500, 400)])
@@ -33,6 +34,9 @@
 
 - (IBAction)customCallbackButtonPressed:(id)sender {
   NSLog(@"CUSTOM CALLBACK PRESS");
+  if([self.delegate respondsToSelector:@selector(customCallbackButtonPressed)]){
+    [self.delegate customCallbackButtonPressed];
+  }
 }
 
 - (IBAction)hideInputViewButtonPressed:(id)sender {

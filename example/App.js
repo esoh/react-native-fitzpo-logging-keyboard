@@ -15,6 +15,7 @@ const App: () => React$Node = () => {
         style={styles.input}
         value={text1}
         onChangeText={setText1}
+        onCustomCallbackButtonPress={() => console.log('hey')}
       />
       <TextInputWithLogger
         style={styles.input}

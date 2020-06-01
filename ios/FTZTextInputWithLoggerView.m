@@ -15,8 +15,21 @@
 
     // add reference to textview from inputview so input knows where to send its actions
     [customizedInputView setTextView:textView];
+    customizedInputView.delegate = self;
   }
   return self;
+}
+
+#pragma mark LoggingKeyboardViewDelegate
+- (void) customCallbackButtonPressed {
+  NSLog(@"CUSTOM CALLBACK WAS BUBBLED UP");
+  if(!self.onCustomCallbackButtonPress){
+    NSLog(@"NO onCustomCallbackButtonPress");
+    return;
+  }
+  NSLog(@"YES onCustomCallbackButtonPress");
+
+  self.onCustomCallbackButtonPress(@{});
 }
 
 @end

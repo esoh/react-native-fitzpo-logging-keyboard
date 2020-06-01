@@ -9,8 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol LoggingKeyboardViewDelegate <NSObject>
+@optional
+- (void) customCallbackButtonPressed;
+@end
+
 @interface LoggingKeyboardView : UIView
 
+@property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
 @property id<UITextInput> textView;
 
 - (IBAction)characterPressed:(id)sender;
