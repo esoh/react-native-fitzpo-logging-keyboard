@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property id<UITextInput> textView;
 
 - (IBAction)characterPressed:(id)sender;
-- (IBAction)hideInputView:(id)sender;
+- (IBAction)hideInputViewButtonPressed:(id)sender;
+- (IBAction)customCallbackButtonPressed:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,10 +31,15 @@
   //[_textView replaceRange:_textView.selectedTextRange withText:character];
 }
 
-- (IBAction)hideInputView:(id)sender {
+- (IBAction)customCallbackButtonPressed:(id)sender {
+  NSLog(@"CUSTOM CALLBACK PRESS");
+}
+
+- (IBAction)hideInputViewButtonPressed:(id)sender {
   [(UITextView *)textView resignFirstResponder];
   //maybe implement callback too?
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

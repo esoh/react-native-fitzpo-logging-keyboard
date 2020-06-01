@@ -35,7 +35,15 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Hide"/>
                     <connections>
-                        <action selector="hideInputView:" destination="-1" eventType="touchUpInside" id="OoO-jY-OuZ"/>
+                        <action selector="hideInputViewButtonPressed:" destination="-1" eventType="touchUpInside" id="slv-F4-R1i"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-Yc-cEm">
+                    <rect key="frame" x="33" y="31" width="116" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Custom Callback"/>
+                    <connections>
+                        <action selector="customCallbackButtonPressed:" destination="-1" eventType="touchUpInside" id="fkm-W2-ph4"/>
                     </connections>
                 </button>
             </subviews>
