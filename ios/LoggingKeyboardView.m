@@ -10,7 +10,10 @@
 @implementation LoggingKeyboardView
 
 - (id)init {
-  self = [super initWithFrame:CGRectMake(0, 0, 100, 200)];
+  //self = [super initWithFrame:CGRectMake(0, 0, 100, 200)];
+  NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
+  NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
+  self = [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] lastObject];
   return self;
 }
 
