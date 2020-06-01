@@ -9,6 +9,7 @@ RCT_EXPORT_MODULE(FTZTextInputWithLogger)
 RCT_EXPORT_VIEW_PROPERTY(value, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(onCustomCallbackButtonPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onChangeText, RCTBubblingEventBlock)
 
 - (UIView *)view
 {

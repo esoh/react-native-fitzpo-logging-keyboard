@@ -5,6 +5,7 @@
 <LoggingKeyboardViewDelegate>
 
 @property (nonatomic, copy) RCTBubblingEventBlock onCustomCallbackButtonPress;
+@property (nonatomic, copy) RCTBubblingEventBlock onChangeText;
 @property (nonatomic) NSString *value;
 
 @end
