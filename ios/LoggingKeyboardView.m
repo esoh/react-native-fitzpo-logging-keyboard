@@ -28,8 +28,7 @@
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
   NSLog(@"BUTTON PRESS %@", character);
-  [(UITextView *)textView setText:@"PLEASE WORK"];
-  //[_textView replaceRange:_textView.selectedTextRange withText:character];
+  [(UITextView *)textView replaceRange:textView.selectedTextRange withText:character];
 }
 
 - (IBAction)customCallbackButtonPressed:(id)sender {

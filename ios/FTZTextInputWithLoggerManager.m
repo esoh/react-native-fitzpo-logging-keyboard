@@ -5,12 +5,14 @@
 @implementation FTZTextInputWithLoggerManager
 
 RCT_EXPORT_MODULE(FTZTextInputWithLogger)
+
+RCT_EXPORT_VIEW_PROPERTY(value, NSString)
+
 RCT_EXPORT_VIEW_PROPERTY(onCustomCallbackButtonPress, RCTBubblingEventBlock)
 
 - (UIView *)view
 {
-  FTZTextInputWithLoggerView *textInputView = [[FTZTextInputWithLoggerView alloc] initWithBridge:self.bridge];
-  return textInputView;
+  return [[FTZTextInputWithLoggerView alloc] initWithBridge:self.bridge];
 }
 
 @end

@@ -9,6 +9,14 @@ const App: () => React$Node = () => {
   const [text2, setText2] = useState('')
   const [text3, setText3] = useState('')
 
+  useEffect(() => {
+    console.log('1', text1)
+    console.log('2', text2)
+    console.log('3', text3)
+  })
+
+  /* only supports value, onChangeText */
+
   return (
     <View style={styles.container}>
       <TextInputWithLogger
@@ -19,8 +27,7 @@ const App: () => React$Node = () => {
       />
       <TextInputWithLogger
         style={styles.input}
-        value={text2}
-        onChangeText={setText2}
+        value={text3}
       />
       <TextInput
         style={styles.input}
