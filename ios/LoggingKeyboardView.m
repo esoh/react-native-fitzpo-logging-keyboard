@@ -27,7 +27,7 @@
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
   NSLog(@"BUTTON PRESS %@", character);
-  [_textView insertText:character];
+  //[_textView replaceRange:_textView.selectedTextRange withText:character];
 }
 
 /*

@@ -33,10 +33,19 @@ RCT_EXPORT_METHOD( hijackInput:(nonnull NSNumber *)reactTag callback:(RCTRespons
   // UITextView *view = (UITextView*)[_bridge.uiManager viewForReactTag:reactTag];
   // [view replaceRange:view.selectedTextRange withText:@"A"];
 
+  // connect custom input to the textview
   UITextView* textView = (UITextView*)view.backedTextInputView;
   [textView setInputView:inputView];
+
+  // set custom input to edit the UITextView connected to the React Tag for
+  // editing
   [inputView setTextView:textView];
   [textView reloadInputViews];
+
+  UITextRange* range = textView.selectedTextRange;
+  if(range) {
+    [textView replaceRange:textView.selectedTextRange withText:@"TESTINGMOTHERFUCKER"];
+  }
 
   callback(@[[NSString stringWithFormat: @"reactTag: %@", reactTag]]);
 }
