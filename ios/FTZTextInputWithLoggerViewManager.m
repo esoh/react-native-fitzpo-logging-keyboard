@@ -1,10 +1,10 @@
-#import "TextInputWithLoggerViewManager.h"
+#import "FTZTextInputWithLoggerViewManager.h"
 #import "LoggingKeyboardView.h"
 #import <React/RCTSinglelineTextInputView.h>
 
-@implementation TextInputWithLoggerViewManager
+@implementation FTZTextInputWithLoggerViewManager
 
-RCT_EXPORT_MODULE(TextInputWithLogger)
+RCT_EXPORT_MODULE(FTZTextInputWithLogger)
 
 - (UIView *)view
 {

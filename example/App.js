@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { TextInputWithLogger, ExerciseSetInput } from 'fitzpo-logging-keyboard';
-
-console.log('tiwl', TextInputWithLogger)
-console.log('tiwl', ExerciseSetInput)
+import { TextInputWithLogger } from 'fitzpo-logging-keyboard';
 
 const App: () => React$Node = () => {
 
@@ -14,6 +11,11 @@ const App: () => React$Node = () => {
 
   return (
     <View style={styles.container}>
+      <TextInputWithLogger
+        style={styles.input}
+        value={text1}
+        onChangeText={setText1}
+      />
       <TextInputWithLogger
         style={styles.input}
         value={text2}
