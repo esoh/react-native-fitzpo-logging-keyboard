@@ -1,6 +1,7 @@
 #import "LoggingKeyboard.h"
 #import "RCTUIManager.h"
 #import <React/RCTSinglelineTextInputView.h>
+#import "LoggingKeyboardView.h"
 
 @implementation LoggingKeyboard
 
@@ -25,7 +26,12 @@ RCT_EXPORT_METHOD( hijackInput:(nonnull NSNumber *)reactTag callback:(RCTRespons
   // text input view to hook up custom keyboard view to
   RCTSinglelineTextInputView *view = (RCTSinglelineTextInputView*)[_bridge.uiManager viewForReactTag:reactTag];
   // custom keyboard view
-  UIView* inputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+  LoggingKeyboardView* inputView = [[LoggingKeyboardView alloc] init];
+  // so somehow I need this inputView to pass to call view's events
+  //
+  // onButotnClick
+  // UITextView *view = (UITextView*)[_bridge.uiManager viewForReactTag:reactTag];
+  // [view replaceRange:view.selectedTextRange withText:@"A"];
 
   UITextView* textView = (UITextView*)view.backedTextInputView;
   [textView setInputView:inputView];
