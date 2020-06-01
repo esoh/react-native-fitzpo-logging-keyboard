@@ -10,6 +10,7 @@ import {
   TextInput,
   AppRegistry,
   View,
+  requireNativeComponent,
 } from 'react-native'
 
 const { LoggingKeyboard: { hijackInput } } = NativeModules;
@@ -39,4 +40,9 @@ const ExerciseSetInput = forwardRef((props, ref) => {
   )
 })
 
-export { ExerciseSetInput };
+const TextInputWithLogger = requireNativeComponent('TextInputWithLogger')
+
+export {
+  ExerciseSetInput,
+  TextInputWithLogger,
+};

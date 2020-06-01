@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { ExerciseSetInput } from 'fitzpo-logging-keyboard';
+import { TextInputWithLogger, ExerciseSetInput } from 'fitzpo-logging-keyboard';
+
+console.log('tiwl', TextInputWithLogger)
+console.log('tiwl', ExerciseSetInput)
 
 const App: () => React$Node = () => {
 
   const [text0, setText0] = useState('')
   const [text1, setText1] = useState('')
   const [text2, setText2] = useState('')
+  const [text3, setText3] = useState('')
 
   return (
     <View style={styles.container}>
-      <ExerciseSetInput
-        style={styles.input}
-        value={text0}
-        onChangeText={setText0}
-      />
-      <ExerciseSetInput
-        style={styles.input}
-        value={text1}
-        onChangeText={setText1}
-      />
-      <TextInput
+      <TextInputWithLogger
         style={styles.input}
         value={text2}
         onChangeText={setText2}
+      />
+      <TextInput
+        style={styles.input}
+        value={text3}
+        onChangeText={setText3}
       />
     </View>
   );
