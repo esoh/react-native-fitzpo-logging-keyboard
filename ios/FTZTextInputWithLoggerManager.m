@@ -1,8 +1,8 @@
-#import "FTZTextInputWithLoggerViewManager.h"
+#import "FTZTextInputWithLoggerManager.h"
 #import "FTZTextInputWithLoggerView.h"
 #import <React/RCTSinglelineTextInputView.h>
 
-@implementation FTZTextInputWithLoggerViewManager
+@implementation FTZTextInputWithLoggerManager
 
 RCT_EXPORT_MODULE(FTZTextInputWithLogger)
 
