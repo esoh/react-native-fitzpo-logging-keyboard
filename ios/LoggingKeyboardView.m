@@ -4,7 +4,6 @@
 //
 //  Created by Fitzpo Admin on 5/31/20.
 //
-
 #import "LoggingKeyboardView.h"
 
 @implementation LoggingKeyboardView
@@ -15,8 +14,18 @@
 @synthesize textView;
 @synthesize delegate;
 
+CGFloat const keyboardHeight = 100;
+
 - (id)init {
-  if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, 100)])
+
+  // adjust keyboardView within view
+  CGFloat safeAreaBottomPadding = 0.0f;
+  if (@available(iOS 11.0, *)) {
+    UIWindow *window = UIApplication.sharedApplication.keyWindow;
+    safeAreaBottomPadding = window.safeAreaInsets.top;
+  }
+
+  if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, keyboardHeight + safeAreaBottomPadding)])
   {
     NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
@@ -29,7 +38,7 @@
 - (void)layoutSubviews {
   [super layoutSubviews];
   NSLog(@"B00: LAYOUT");
-  keyboardView.frame = self.bounds;
+  keyboardView.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, keyboardHeight);
   keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 }
 
