@@ -8,21 +8,29 @@
 #import "LoggingKeyboardView.h"
 
 @implementation LoggingKeyboardView
+{
+  UIView* keyboardView;
+}
 
 @synthesize textView;
 @synthesize delegate;
 
 - (id)init {
-  if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, 400)])
+  if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, 100)])
   {
     NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
-    UIView* keyboardView= [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] objectAtIndex:0];
-    keyboardView.frame = self.bounds;
-    keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    keyboardView= [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] objectAtIndex:0];
     [self addSubview:keyboardView];
   }
   return self;
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  NSLog(@"B00: LAYOUT");
+  keyboardView.frame = self.bounds;
+  keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 }
 
 - (IBAction)characterPressed:(id)sender {
