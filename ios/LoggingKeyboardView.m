@@ -13,11 +13,13 @@
 @synthesize delegate;
 
 - (id)init {
-  if(self = [super initWithFrame:CGRectMake(0, 0, 500, 400)])
+  if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, 400)])
   {
     NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
     UIView* keyboardView= [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] objectAtIndex:0];
+    keyboardView.frame = self.bounds;
+    keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     [self addSubview:keyboardView];
   }
   return self;
