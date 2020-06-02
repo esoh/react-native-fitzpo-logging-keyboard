@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.resource_bundles = {
-    'Resources' => ['ios/**/*.xib']
+    'Resources' => ['ios/**/*.xib', 'ios/**/*.xcassets']
   }
 
   s.dependency "React"

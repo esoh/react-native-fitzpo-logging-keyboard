@@ -11,46 +11,39 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoggingKeyboardView"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="422" height="165"/>
+            <rect key="frame" x="0.0" y="0.0" width="416" height="313"/>
             <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e1N-VV-USe">
-                    <rect key="frame" x="278" y="92" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="ButtonB"/>
-                    <connections>
-                        <action selector="characterPressed:" destination="-1" eventType="touchUpInside" id="miX-Rc-hFD"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rSZ-Ye-9e0">
-                    <rect key="frame" x="292" y="31" width="32" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Hide"/>
-                    <connections>
-                        <action selector="hideInputViewButtonPressed:" destination="-1" eventType="touchUpInside" id="slv-F4-R1i"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkM-Yc-cEm">
-                    <rect key="frame" x="33" y="31" width="116" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Custom Callback"/>
-                    <connections>
-                        <action selector="customCallbackButtonPressed:" destination="-1" eventType="touchUpInside" id="fkm-W2-ph4"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AnV-YF-Dqt">
-                    <rect key="frame" x="0.0" y="151" width="60" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="A"/>
-                    <connections>
-                        <action selector="characterPressed:" destination="-1" eventType="touchUpInside" id="IVu-HT-QyD"/>
-                    </connections>
-                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Avg-gY-R5Y">
+                    <rect key="frame" x="0.0" y="0.0" width="416" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cdq-u5-h2U">
+                            <rect key="frame" x="380.00000000000011" y="4.7168541407850739" width="19.000000000000028" height="22.000000000000004"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="chevron.down" catalog="system"/>
+                            <connections>
+                                <action selector="hideInputViewButtonPressed:" destination="-1" eventType="touchUpInside" id="nBS-na-8al"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="dQF-Zv-chy"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Avg-gY-R5Y" secondAttribute="trailing" id="AyK-fz-bBn"/>
+                <constraint firstItem="Avg-gY-R5Y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iL2-IW-zHG"/>
+                <constraint firstItem="Avg-gY-R5Y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sHA-Cl-sZL"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="143.47826086956522" y="389.39732142857139"/>
+            <point key="canvasLocation" x="-179.71014492753625" y="103.45982142857143"/>
         </view>
     </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+    </resources>
 </document>
