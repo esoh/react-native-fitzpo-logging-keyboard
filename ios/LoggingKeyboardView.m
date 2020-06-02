@@ -38,6 +38,7 @@ CGFloat const keyboardHeight = 100;
 - (void)layoutSubviews {
   [super layoutSubviews];
   NSLog(@"B00: LAYOUT");
+  self.backgroundColor = keyboardView.backgroundColor;
   keyboardView.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, keyboardHeight);
   keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 }
