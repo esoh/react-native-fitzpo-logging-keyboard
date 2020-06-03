@@ -4,6 +4,8 @@
 //
 //  Created by Fitzpo Admin on 5/31/20.
 //
+#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
+
 #import "LoggingKeyboardView.h"
 
 @implementation LoggingKeyboardView
@@ -55,7 +57,11 @@ CGFloat const keyboardHeight = 300;
 {
   NSNumber* number = [self getNumberFromString:textView.text];
   if(number == nil){
-    return;
+    if ( [allTrim( textView.text ) length] == 0 ) {
+      number = 0;
+    } else {
+      return;
+    }
   }
   number = @(number.doubleValue + stepValue.doubleValue);
   textView.text = [number stringValue];
@@ -65,7 +71,11 @@ CGFloat const keyboardHeight = 300;
 {
   NSNumber* number = [self getNumberFromString:textView.text];
   if(number == nil){
-    return;
+    if ( [allTrim( textView.text ) length] == 0 ) {
+      number = 0;
+    } else {
+      return;
+    }
   }
   number = @(number.doubleValue - stepValue.doubleValue);
   textView.text = [number stringValue];
@@ -106,7 +116,11 @@ CGFloat const keyboardHeight = 300;
   //try to convert to float, plus/minus it, else do nothing (UITextField *)textView.text
   NSNumber* number = [self getNumberFromString:textView.text];
   if(number == nil){
-    return;
+    if ( [allTrim( textView.text ) length] == 0 ) {
+      number = 0;
+    } else {
+      return;
+    }
   }
   number = @(- number.doubleValue);
   textView.text = [number stringValue];
