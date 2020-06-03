@@ -13,6 +13,8 @@
 
 @synthesize textView;
 @synthesize delegate;
+@synthesize autocompleteValue;
+@synthesize stepValue;
 
 CGFloat const keyboardHeight = 300;
 
@@ -41,6 +43,32 @@ CGFloat const keyboardHeight = 300;
   self.backgroundColor = keyboardView.backgroundColor;
   keyboardView.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, keyboardHeight);
   keyboardView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+}
+
+- (IBAction)autocompleteButtonPressed:(id)sender
+{
+  NSLog(@"E00: AUTOCOMPLETE %@", autocompleteValue);
+  textView.text = [autocompleteValue stringValue];
+}
+
+- (IBAction)incrementButtonPressed:(id)sender
+{
+  NSNumber* number = [self getNumberFromString:textView.text];
+  if(number == nil){
+    return;
+  }
+  number = @(number.doubleValue + stepValue.doubleValue);
+  textView.text = [number stringValue];
+}
+
+- (IBAction)decrementButtonPressed:(id)sender
+{
+  NSNumber* number = [self getNumberFromString:textView.text];
+  if(number == nil){
+    return;
+  }
+  number = @(number.doubleValue - stepValue.doubleValue);
+  textView.text = [number stringValue];
 }
 
 - (IBAction)characterPressed:(id)sender {
@@ -76,17 +104,19 @@ CGFloat const keyboardHeight = 300;
 
 - (IBAction)plusMinusButtonPressed:(id)sender {
   //try to convert to float, plus/minus it, else do nothing (UITextField *)textView.text
-  NSString *text = textView.text;
-
-  NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-  [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-  [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
-  NSNumber* number = [numberFormatter numberFromString:text];
+  NSNumber* number = [self getNumberFromString:textView.text];
   if(number == nil){
     return;
   }
   number = @(- number.doubleValue);
   textView.text = [number stringValue];
+}
+
+- (NSNumber *)getNumberFromString:(NSString *)candidateString {
+  NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+  [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+  [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
+  return [numberFormatter numberFromString:candidateString];
 }
 
 

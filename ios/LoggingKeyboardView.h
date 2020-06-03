@@ -19,7 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
 @property UITextField *textView;
+@property NSNumber* autocompleteValue;
+@property NSNumber* stepValue;
 
+@property (weak, nonatomic) IBOutlet UIButton *decrementButton;
+@property (weak, nonatomic) IBOutlet UIButton *incrementButton;
+@property (weak, nonatomic) IBOutlet UIButton *autocompleteButton;
 @property (weak, nonatomic) IBOutlet UILabel *autocompleteLabel;
 - (IBAction)characterPressed:(id)sender;
 - (IBAction)deletePressed:(id)sender;
@@ -27,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)leftButtonPressed:(id)sender;
 - (IBAction)rightButtonPressed:(id)sender;
 - (IBAction)plusMinusButtonPressed:(id)sender;
+- (IBAction)autocompleteButtonPressed:(id)sender;
+- (IBAction)incrementButtonPressed:(id)sender;
+- (IBAction)decrementButtonPressed:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,8 @@ const App: () => React$Node = () => {
         onRightButtonPress={() => ref1.current?.focus()}
         onLeftButtonPress={() => console.log('RAAT')}
         autocompleteLabel='testing 123'
+        autocompleteValue={12}
+        stepValue={1337}
       />
       <TextInputWithLogger
         ref={ref1}

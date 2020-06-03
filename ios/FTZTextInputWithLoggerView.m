@@ -36,6 +36,19 @@
   customizedInputView.autocompleteLabel.text = incomingValue;
 }
 
+- (void)setAutocompleteValue:(NSNumber *)incomingValue
+{
+  [customizedInputView.autocompleteButton setTitle:[incomingValue stringValue] forState:UIControlStateNormal];
+  customizedInputView.autocompleteValue = incomingValue;
+}
+
+- (void)setStepValue:(NSNumber *)value
+{
+  [customizedInputView.incrementButton setTitle:[NSString stringWithFormat:@"+%@",[value stringValue]] forState:UIControlStateNormal];
+  [customizedInputView.decrementButton setTitle:[NSString stringWithFormat:@"-%@",[value stringValue]] forState:UIControlStateNormal];
+  customizedInputView.stepValue = value;
+}
+
 - (void)setValue:(NSString *)incomingValue
 {
   NSLog(@"A00: Received value %@", incomingValue);
