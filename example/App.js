@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { TextInputWithLogger } from 'fitzpo-logging-keyboard';
 
@@ -8,6 +8,10 @@ const App: () => React$Node = () => {
   const [text1, setText1] = useState('')
   const [text2, setText2] = useState('')
   const [text3, setText3] = useState('')
+
+  const ref0 = useRef();
+  const ref1 = useRef();
+  const ref2 = useRef();
 
   useEffect(() => {
     console.log('1', text1)
@@ -20,17 +24,22 @@ const App: () => React$Node = () => {
   return (
     <View style={styles.container}>
       <TextInputWithLogger
+        ref={ref0}
         style={styles.input}
-        value={text1}
-        onChangeText={setText1}
-        onLeftButtonPress={() => console.log('LAYFT')}
-        onRightButtonPress={() => console.log('RAAT')}
+        value={text0}
+        onChangeText={setText0}
+        onRightButtonPress={() => ref1.current?.focus()}
+        onLeftButtonPress={() => console.log('RAAT')}
       />
       <TextInputWithLogger
+        ref={ref1}
         style={styles.input}
         value={text3}
+        onLeftButtonPress={() => ref0.current?.focus()}
+        onRightButtonPress={() => ref2.current?.focus()}
       />
       <TextInput
+        ref={ref2}
         style={styles.input}
         value={text3}
         onChangeText={setText3}
