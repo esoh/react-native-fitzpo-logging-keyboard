@@ -50,13 +50,13 @@
                                 </button>
                                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MK5-Kf-OQx">
                                     <rect key="frame" x="95" y="0.0" width="90" height="22"/>
-                                    <state key="normal" image="plus.slash.minus" catalog="system">
+                                    <state key="normal" image="plus.slash.minus">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                     </state>
                                 </button>
                                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06T-RU-be6">
                                     <rect key="frame" x="190" y="0.0" width="90" height="22"/>
-                                    <state key="normal" image="plus.slash.minus" catalog="system">
+                                    <state key="normal" image="plus.slash.minus">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                     </state>
                                 </button>
@@ -371,7 +371,6 @@
         <image name="arrow.right" width="16" height="13"/>
         <image name="chevron.down" width="15" height="8"/>
         <image name="delete.left.fill" width="18" height="16"/>
-        <image name="plus.slash.minus" catalog="system" width="128" height="115"/>
         <image name="plus.slash.minus" width="16" height="16"/>
     </resources>
 </document>
