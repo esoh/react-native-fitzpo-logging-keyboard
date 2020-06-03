@@ -2,7 +2,7 @@
 #import "LoggingKeyboardView.h"
 
 @interface FTZTextInputWithLoggerView : RCTSinglelineTextInputView
-<LoggingKeyboardViewDelegate>
+<LoggingKeyboardViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, copy) RCTBubblingEventBlock onLeftButtonPress;
 @property (nonatomic, copy) RCTBubblingEventBlock onRightButtonPress;

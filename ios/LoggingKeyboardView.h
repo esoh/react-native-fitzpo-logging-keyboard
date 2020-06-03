@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoggingKeyboardView : UIView
 
 @property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
-@property UITextView *textView;
+@property UITextField *textView;
 
 - (IBAction)characterPressed:(id)sender;
 - (IBAction)deletePressed:(id)sender;

@@ -3,7 +3,7 @@
 
 @implementation FTZTextInputWithLoggerView
 {
-  UITextView* textView;
+  UITextField* textView;
 }
 @synthesize value;
 
@@ -14,7 +14,8 @@
     LoggingKeyboardView* customizedInputView= [[LoggingKeyboardView alloc] init];
 
     // grab textview from textinput view and attach custom keyboard input view to it
-    textView = (UITextView*)self.backedTextInputView;
+    textView = (UITextField*)self.backedTextInputView;
+    textView.delegate = self;
     [textView setInputView:customizedInputView];
     [(UITextField*)textView addTarget:self
       action:@selector(textFieldDidChange)
@@ -70,6 +71,14 @@
   }
   self.onRightButtonPress(@{});
 
+}
+
+#pragma mark UITextFieldDelegate
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textView {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [textView selectAll:nil];
+  });
+  return YES;
 }
 
 @end

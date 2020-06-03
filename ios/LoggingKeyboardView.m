@@ -75,7 +75,7 @@ CGFloat const keyboardHeight = 300;
 }
 
 - (IBAction)plusMinusButtonPressed:(id)sender {
-  //try to convert to float, plus/minus it, else do nothing (UITextView *)textView.text
+  //try to convert to float, plus/minus it, else do nothing (UITextField *)textView.text
   NSString *text = textView.text;
 
   NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
