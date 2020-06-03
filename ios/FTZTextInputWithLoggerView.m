@@ -80,6 +80,24 @@
   });
 }
 
+-(void) setLeftButtonEnabled:(BOOL)enabled
+{
+  if(enabled){
+    [customizedInputView.leftButton setEnabled:YES];
+  } else {
+    [customizedInputView.leftButton setEnabled:NO];
+  }
+}
+
+-(void) setRightButtonEnabled:(BOOL)enabled
+{
+  if(enabled){
+    [customizedInputView.rightButton setEnabled:YES];
+  } else {
+    [customizedInputView.rightButton setEnabled:NO];
+  }
+}
+
 #pragma mark LoggingKeyboardViewDelegate
 - (void) leftButtonPressed
 {

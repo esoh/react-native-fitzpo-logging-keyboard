@@ -14,6 +14,8 @@
                 <outlet property="autocompleteLabel" destination="gWj-sv-qng" id="00J-f9-4jH"/>
                 <outlet property="decrementButton" destination="QHe-vk-x4L" id="99R-ED-VHv"/>
                 <outlet property="incrementButton" destination="e2o-rJ-WDd" id="VL4-4u-aAi"/>
+                <outlet property="leftButton" destination="oPh-qb-QWc" id="j6v-oW-1xI"/>
+                <outlet property="rightButton" destination="aJf-iO-CAq" id="XjT-V9-t0o"/>
                 <outlet property="unitLabel" destination="Y7N-SA-Lx7" id="tXy-D4-hmT"/>
             </connections>
         </placeholder>
@@ -310,14 +312,14 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="97i-ii-1o1">
                                     <rect key="frame" x="0.0" y="86.5" width="128" height="81.5"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPh-qb-QWc">
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPh-qb-QWc">
                                             <rect key="frame" x="0.0" y="0.0" width="61.5" height="81.5"/>
                                             <state key="normal" image="arrow.left"/>
                                             <connections>
                                                 <action selector="leftButtonPressed:" destination="-1" eventType="touchUpInside" id="ljX-Ok-kJT"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJf-iO-CAq">
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJf-iO-CAq">
                                             <rect key="frame" x="66.5" y="0.0" width="61.5" height="81.5"/>
                                             <state key="normal" image="arrow.right"/>
                                             <connections>

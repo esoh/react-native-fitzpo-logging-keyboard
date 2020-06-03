@@ -29,8 +29,7 @@ const App: () => React$Node = () => {
         value={text0}
         onChangeText={setText0}
         onRightButtonPress={() => ref1.current?.focus()}
-        onLeftButtonPress={() => console.log('RAAT')}
-        autocompleteLabel='Previously: Set 3'
+        autocompleteLabel='Previous Set 3 Target'
         autocompleteValue={12}
         stepValue={2.5}
         unit='lbs'
@@ -40,12 +39,11 @@ const App: () => React$Node = () => {
         style={styles.input}
         value={text3}
         onLeftButtonPress={() => ref0.current?.focus()}
-        onRightButtonPress={() => ref2.current?.focus()}
       />
       <TextInput
         ref={ref2}
         style={styles.input}
-        value={text3}
+        value={'I AM A REGULAR TEXT INPUT'}
         onChangeText={setText3}
       />
     </View>

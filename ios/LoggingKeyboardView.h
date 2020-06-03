@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSNumber* autocompleteValue;
 @property NSNumber* stepValue;
 
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet UILabel *unitLabel;
 @property (weak, nonatomic) IBOutlet UIButton *decrementButton;
 @property (weak, nonatomic) IBOutlet UIButton *incrementButton;

@@ -11,6 +11,8 @@ const TextInputWithLogger = forwardRef(({ onChangeText, ...attr }, ref) => {
     <FTZTextInputWithLogger
       ref={ref}
       onChangeText={_onChangeText}
+      leftButtonEnabled={!!attr.onLeftButtonPress}
+      rightButtonEnabled={!!attr.onRightButtonPress}
       {...attr}
     />
   )

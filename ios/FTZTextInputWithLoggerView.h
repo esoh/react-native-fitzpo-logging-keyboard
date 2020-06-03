@@ -14,4 +14,7 @@
 @property (nonatomic) NSNumber *stepValue;
 @property (nonatomic) NSString *unit;
 
+@property (nonatomic) BOOL rightButtonEnabled;
+@property (nonatomic) BOOL leftButtonEnabled;
+
 @end
