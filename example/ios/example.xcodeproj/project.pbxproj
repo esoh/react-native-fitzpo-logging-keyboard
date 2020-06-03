@@ -161,7 +161,6 @@
 				FC8149A00C7DD117EF359910 /* Pods-example-tvOSTests.debug.xcconfig */,
 				86094E8F63874D7371C56AC6 /* Pods-example-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

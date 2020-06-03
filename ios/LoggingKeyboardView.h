@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
 @property UITextField *textView;
 
+@property (weak, nonatomic) IBOutlet UILabel *autocompleteLabel;
 - (IBAction)characterPressed:(id)sender;
 - (IBAction)deletePressed:(id)sender;
 - (IBAction)hideInputViewButtonPressed:(id)sender;

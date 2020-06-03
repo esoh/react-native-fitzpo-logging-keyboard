@@ -7,7 +7,7 @@
 RCT_EXPORT_MODULE(FTZTextInputWithLogger)
 
 RCT_EXPORT_VIEW_PROPERTY(value, NSString)
-RCT_EXPORT_VIEW_PROPERTY(autocompleteTitle, NSString)
+RCT_EXPORT_VIEW_PROPERTY(autocompleteLabel, NSString)
 RCT_EXPORT_VIEW_PROPERTY(autocompleteValue, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(stepValue, NSNumber)
 

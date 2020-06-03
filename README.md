@@ -19,7 +19,7 @@ const App = () => {
     value={text}
     onLeftButtonPress={() => console.log('do stuff')}
     onRightButtonPress={() => console.log('do stuff')}
-    autocompleteTitle='testing'
+    autocompleteLabel='testing'
     autocompleteValue={15}
     stepValue={1}
   />

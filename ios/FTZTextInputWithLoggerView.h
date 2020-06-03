@@ -9,7 +9,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onChangeText;
 
 @property (nonatomic) NSString *value;
-@property (nonatomic) NSString *autocompleteTitle;
+@property (nonatomic) NSString *autocompleteLabel;
 @property (nonatomic) NSNumber *autocompleteValue;
 @property (nonatomic) NSNumber *stepValue;
 

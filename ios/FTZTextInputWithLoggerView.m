@@ -4,6 +4,7 @@
 @implementation FTZTextInputWithLoggerView
 {
   UITextField* textView;
+  LoggingKeyboardView* customizedInputView;
 }
 @synthesize value;
 
@@ -11,7 +12,7 @@
 {
   if(self = [super initWithBridge:bridge]) {
     // initialize custom keyboard input view
-    LoggingKeyboardView* customizedInputView= [[LoggingKeyboardView alloc] init];
+    customizedInputView= [[LoggingKeyboardView alloc] init];
 
     // grab textview from textinput view and attach custom keyboard input view to it
     textView = (UITextField*)self.backedTextInputView;
@@ -27,6 +28,12 @@
     customizedInputView.delegate = self;
   }
   return self;
+}
+
+- (void)setAutocompleteLabel:(NSString *)incomingValue
+{
+  NSLog(@"C00: set auto complete");
+  customizedInputView.autocompleteLabel.text = incomingValue;
 }
 
 - (void)setValue:(NSString *)incomingValue

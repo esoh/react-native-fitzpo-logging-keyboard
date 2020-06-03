@@ -8,7 +8,7 @@
 
 @implementation LoggingKeyboardView
 {
-  UIView* keyboardView;
+  LoggingKeyboardView* keyboardView;
 }
 
 @synthesize textView;
