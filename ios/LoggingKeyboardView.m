@@ -51,10 +51,17 @@ CGFloat const keyboardHeight = 300;
   [textView replaceRange:textView.selectedTextRange withText:character];
 }
 
-- (IBAction)customCallbackButtonPressed:(id)sender {
+- (IBAction)leftButtonPressed:(id)sender {
   NSLog(@"CUSTOM CALLBACK PRESS");
-  if([self.delegate respondsToSelector:@selector(customCallbackButtonPressed)]){
-    [self.delegate customCallbackButtonPressed];
+  if([self.delegate respondsToSelector:@selector(leftButtonPressed)]){
+    [self.delegate leftButtonPressed];
+  }
+}
+
+- (IBAction)rightButtonPressed:(id)sender {
+  NSLog(@"CUSTOM CALLBACK PRESS");
+  if([self.delegate respondsToSelector:@selector(rightButtonPressed)]){
+    [self.delegate rightButtonPressed];
   }
 }
 

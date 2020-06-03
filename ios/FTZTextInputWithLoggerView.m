@@ -55,16 +55,21 @@
 }
 
 #pragma mark LoggingKeyboardViewDelegate
-- (void) customCallbackButtonPressed
+- (void) leftButtonPressed
 {
-  NSLog(@"CUSTOM CALLBACK WAS BUBBLED UP");
-  if(!self.onCustomCallbackButtonPress){
-    NSLog(@"NO onCustomCallbackButtonPress");
+  if(!self.onLeftButtonPress){
     return;
   }
-  NSLog(@"YES onCustomCallbackButtonPress");
+  self.onLeftButtonPress(@{});
+}
 
-  self.onCustomCallbackButtonPress(@{});
+- (void) rightButtonPressed
+{
+  if(!self.onRightButtonPress){
+    return;
+  }
+  self.onRightButtonPress(@{});
+
 }
 
 @end

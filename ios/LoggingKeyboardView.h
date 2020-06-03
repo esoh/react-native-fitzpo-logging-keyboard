@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LoggingKeyboardViewDelegate <NSObject>
 @optional
-- (void) customCallbackButtonPressed;
+- (void) leftButtonPressed;
+- (void) rightButtonPressed;
 @end
 
 @interface LoggingKeyboardView : UIView
@@ -22,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)characterPressed:(id)sender;
 - (IBAction)deletePressed:(id)sender;
 - (IBAction)hideInputViewButtonPressed:(id)sender;
-- (IBAction)customCallbackButtonPressed:(id)sender;
+- (IBAction)leftButtonPressed:(id)sender;
+- (IBAction)rightButtonPressed:(id)sender;
 - (IBAction)plusMinusButtonPressed:(id)sender;
 @end
 

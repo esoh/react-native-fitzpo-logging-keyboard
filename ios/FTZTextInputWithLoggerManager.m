@@ -7,8 +7,12 @@
 RCT_EXPORT_MODULE(FTZTextInputWithLogger)
 
 RCT_EXPORT_VIEW_PROPERTY(value, NSString)
+RCT_EXPORT_VIEW_PROPERTY(autocompleteTitle, NSString)
+RCT_EXPORT_VIEW_PROPERTY(autocompleteValue, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(stepValue, NSNumber)
 
-RCT_EXPORT_VIEW_PROPERTY(onCustomCallbackButtonPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLeftButtonPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onRightButtonPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onChangeText, RCTBubblingEventBlock)
 
 - (UIView *)view

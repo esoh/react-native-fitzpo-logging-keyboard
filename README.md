@@ -17,7 +17,11 @@ const App = () => {
     ref={ref}
     onChangeText={text => setState(text)}
     value={text}
-    onCustomCallbackButtonPress={() => console.log('do stuff')}
+    onLeftButtonPress={() => console.log('do stuff')}
+    onRightButtonPress={() => console.log('do stuff')}
+    autocompleteTitle='testing'
+    autocompleteValue={15}
+    stepValue={1}
   />
 }
 ```
