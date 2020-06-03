@@ -14,7 +14,7 @@
 @synthesize textView;
 @synthesize delegate;
 
-CGFloat const keyboardHeight = 100;
+CGFloat const keyboardHeight = 300;
 
 - (id)init {
 
@@ -48,7 +48,7 @@ CGFloat const keyboardHeight = 100;
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
   NSLog(@"BUTTON PRESS %@", character);
-  [(UITextView *)textView replaceRange:textView.selectedTextRange withText:character];
+  [textView replaceRange:textView.selectedTextRange withText:character];
 }
 
 - (IBAction)customCallbackButtonPressed:(id)sender {
@@ -58,9 +58,28 @@ CGFloat const keyboardHeight = 100;
   }
 }
 
+- (IBAction)deletePressed:(id)sender {
+  [textView deleteBackward];
+}
+
 - (IBAction)hideInputViewButtonPressed:(id)sender {
-  [(UITextView *)textView resignFirstResponder];
+  [textView resignFirstResponder];
   //maybe implement callback too?
+}
+
+- (IBAction)plusMinusButtonPressed:(id)sender {
+  //try to convert to float, plus/minus it, else do nothing (UITextView *)textView.text
+  NSString *text = textView.text;
+
+  NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+  [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+  [numberFormatter setNumberStyle:NSNumberFormatterScientificStyle];
+  NSNumber* number = [numberFormatter numberFromString:text];
+  if(number == nil){
+    return;
+  }
+  number = @(- number.doubleValue);
+  textView.text = [number stringValue];
 }
 
 

@@ -17,11 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoggingKeyboardView : UIView
 
 @property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
-@property id<UITextInput> textView;
+@property UITextView *textView;
 
 - (IBAction)characterPressed:(id)sender;
+- (IBAction)deletePressed:(id)sender;
 - (IBAction)hideInputViewButtonPressed:(id)sender;
 - (IBAction)customCallbackButtonPressed:(id)sender;
+- (IBAction)plusMinusButtonPressed:(id)sender;
 @end
 
 NS_ASSUME_NONNULL_END
