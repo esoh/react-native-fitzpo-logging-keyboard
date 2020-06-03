@@ -12,5 +12,6 @@
 @property (nonatomic) NSString *autocompleteLabel;
 @property (nonatomic) NSNumber *autocompleteValue;
 @property (nonatomic) NSNumber *stepValue;
+@property (nonatomic) NSString *unit;
 
 @end

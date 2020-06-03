@@ -10,6 +10,7 @@ RCT_EXPORT_VIEW_PROPERTY(value, NSString)
 RCT_EXPORT_VIEW_PROPERTY(autocompleteLabel, NSString)
 RCT_EXPORT_VIEW_PROPERTY(autocompleteValue, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(stepValue, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(unit, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(onLeftButtonPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRightButtonPress, RCTBubblingEventBlock)

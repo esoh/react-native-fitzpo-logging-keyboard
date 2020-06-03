@@ -42,6 +42,11 @@
   customizedInputView.autocompleteValue = incomingValue;
 }
 
+- (void)setUnit:(NSString *)unit
+{
+  customizedInputView.unitLabel.text = unit;
+}
+
 - (void)setStepValue:(NSNumber *)value
 {
   [customizedInputView.incrementButton setTitle:[NSString stringWithFormat:@"+%@",[value stringValue]] forState:UIControlStateNormal];

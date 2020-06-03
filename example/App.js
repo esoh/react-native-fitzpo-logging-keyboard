@@ -30,9 +30,10 @@ const App: () => React$Node = () => {
         onChangeText={setText0}
         onRightButtonPress={() => ref1.current?.focus()}
         onLeftButtonPress={() => console.log('RAAT')}
-        autocompleteLabel='testing 123'
+        autocompleteLabel='Previously for Set 3... testing'
         autocompleteValue={12}
-        stepValue={1337}
+        stepValue={2.5}
+        unit='lbs'
       />
       <TextInputWithLogger
         ref={ref1}
