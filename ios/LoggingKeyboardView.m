@@ -51,6 +51,7 @@ CGFloat const keyboardHeight = 300;
 {
   NSLog(@"E00: AUTOCOMPLETE %@", autocompleteValue);
   textField.text = [autocompleteValue stringValue];
+  [textField sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 - (IBAction)incrementButtonPressed:(id)sender
@@ -65,6 +66,7 @@ CGFloat const keyboardHeight = 300;
   }
   number = @(number.doubleValue + stepValue.doubleValue);
   textField.text = [number stringValue];
+  [textField sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 - (IBAction)decrementButtonPressed:(id)sender
@@ -79,6 +81,7 @@ CGFloat const keyboardHeight = 300;
   }
   number = @(number.doubleValue - stepValue.doubleValue);
   textField.text = [number stringValue];
+  [textField sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 - (IBAction)characterPressed:(id)sender {

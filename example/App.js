@@ -14,9 +14,7 @@ const App: () => React$Node = () => {
   const ref2 = useRef();
 
   useEffect(() => {
-    console.log('1', text1)
-    console.log('2', text2)
-    console.log('3', text3)
+    console.log('0', text0)
   })
 
   /* only supports value, onChangeText */
