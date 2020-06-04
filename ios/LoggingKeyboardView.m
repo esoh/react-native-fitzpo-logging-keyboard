@@ -31,6 +31,11 @@ CGFloat const keyboardHeight = 300;
 
   if(self = [super initWithFrame:CGRectMake(0, 0, self.frame.size.width, keyboardHeight + safeAreaBottomPadding)])
   {
+
+    // default vars
+    stepValue = [NSNumber numberWithInt:1];
+
+    // load in keyboard
     NSString *resourcePath = [NSBundle.mainBundle pathForResource:@"Resources" ofType:@"bundle"];
     NSBundle *resourcesBundle = [NSBundle bundleWithPath:resourcePath];
     keyboardView= [[resourcesBundle loadNibNamed:@"LoggingKeyboardView" owner:self options:nil] objectAtIndex:0];
