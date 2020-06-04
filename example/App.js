@@ -28,7 +28,7 @@ const App: () => React$Node = () => {
         onChangeText={setText0}
         onRightButtonPress={() => ref1.current?.focus()}
         autocompleteLabel='Previous Set 3 Target'
-        stepValue={2.5}
+        autocompleteValue={115.25}
         unit='lbs'
       />
       <TextInputWithLogger

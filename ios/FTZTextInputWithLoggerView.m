@@ -38,7 +38,9 @@
 
 - (void)setAutocompleteValue:(NSNumber *)incomingValue
 {
+  NSLog(@"G00: set autcomplete value");
   [customizedInputView.autocompleteButton setTitle:[incomingValue stringValue] forState:UIControlStateNormal];
+  [customizedInputView.autocompleteButton setEnabled:YES];
   customizedInputView.autocompleteValue = incomingValue;
 }
 

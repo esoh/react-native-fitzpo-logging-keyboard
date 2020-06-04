@@ -238,18 +238,21 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWT-Qb-zj9">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="168"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auA-id-89i">
-                                            <rect key="frame" x="31.5" y="85" width="65" height="38"/>
+                                        <button opaque="NO" contentMode="right" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="auA-id-89i">
+                                            <rect key="frame" x="49" y="85" width="30" height="38"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                            <state key="normal" title="Button">
+                                            <state key="normal" title="-">
                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                            <state key="disabled">
+                                                <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="autocompleteButtonPressed:" destination="-1" eventType="touchUpInside" id="3Sk-4P-QFF"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7N-SA-Lx7">
-                                            <rect key="frame" x="97.5" y="98" width="16.5" height="17"/>
+                                            <rect key="frame" x="80" y="98" width="16.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
