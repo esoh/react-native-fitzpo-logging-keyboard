@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { requireNativeComponent, Platform } from 'react-native'
+import { requireNativeComponent, Platform, TextInput } from 'react-native'
 const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger')
 
 const TextInputWithLogger = forwardRef(({ onChangeText, ...attr }, ref) => {
