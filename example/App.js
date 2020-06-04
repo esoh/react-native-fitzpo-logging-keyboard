@@ -30,7 +30,6 @@ const App: () => React$Node = () => {
         onChangeText={setText0}
         onRightButtonPress={() => ref1.current?.focus()}
         autocompleteLabel='Previous Set 3 Target'
-        autocompleteValue={12}
         stepValue={2.5}
         unit='lbs'
       />

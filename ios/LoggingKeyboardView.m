@@ -13,7 +13,7 @@
   LoggingKeyboardView* keyboardView;
 }
 
-@synthesize textView;
+@synthesize textField;
 @synthesize delegate;
 @synthesize autocompleteValue;
 @synthesize stepValue;
@@ -50,35 +50,35 @@ CGFloat const keyboardHeight = 300;
 - (IBAction)autocompleteButtonPressed:(id)sender
 {
   NSLog(@"E00: AUTOCOMPLETE %@", autocompleteValue);
-  textView.text = [autocompleteValue stringValue];
+  textField.text = [autocompleteValue stringValue];
 }
 
 - (IBAction)incrementButtonPressed:(id)sender
 {
-  NSNumber* number = [self getNumberFromString:textView.text];
+  NSNumber* number = [self getNumberFromString:textField.text];
   if(number == nil){
-    if ( [allTrim( textView.text ) length] == 0 ) {
+    if ( [allTrim( textField.text ) length] == 0 ) {
       number = 0;
     } else {
       return;
     }
   }
   number = @(number.doubleValue + stepValue.doubleValue);
-  textView.text = [number stringValue];
+  textField.text = [number stringValue];
 }
 
 - (IBAction)decrementButtonPressed:(id)sender
 {
-  NSNumber* number = [self getNumberFromString:textView.text];
+  NSNumber* number = [self getNumberFromString:textField.text];
   if(number == nil){
-    if ( [allTrim( textView.text ) length] == 0 ) {
+    if ( [allTrim( textField.text ) length] == 0 ) {
       number = 0;
     } else {
       return;
     }
   }
   number = @(number.doubleValue - stepValue.doubleValue);
-  textView.text = [number stringValue];
+  textField.text = [number stringValue];
 }
 
 - (IBAction)characterPressed:(id)sender {
@@ -86,7 +86,7 @@ CGFloat const keyboardHeight = 300;
   NSString *character = [NSString stringWithString:button.titleLabel.text];
 
   NSLog(@"BUTTON PRESS %@", character);
-  [textView replaceRange:textView.selectedTextRange withText:character];
+  [textField replaceRange:textField.selectedTextRange withText:character];
 }
 
 - (IBAction)leftButtonPressed:(id)sender {
@@ -104,26 +104,26 @@ CGFloat const keyboardHeight = 300;
 }
 
 - (IBAction)deletePressed:(id)sender {
-  [textView deleteBackward];
+  [textField deleteBackward];
 }
 
 - (IBAction)hideInputViewButtonPressed:(id)sender {
-  [textView resignFirstResponder];
+  [textField resignFirstResponder];
   //maybe implement callback too?
 }
 
 - (IBAction)plusMinusButtonPressed:(id)sender {
-  //try to convert to float, plus/minus it, else do nothing (UITextField *)textView.text
-  NSNumber* number = [self getNumberFromString:textView.text];
+  //try to convert to float, plus/minus it, else do nothing (UITextField *)textField.text
+  NSNumber* number = [self getNumberFromString:textField.text];
   if(number == nil){
-    if ( [allTrim( textView.text ) length] == 0 ) {
+    if ( [allTrim( textField.text ) length] == 0 ) {
       number = 0;
     } else {
       return;
     }
   }
   number = @(- number.doubleValue);
-  textView.text = [number stringValue];
+  textField.text = [number stringValue];
 }
 
 - (NSNumber *)getNumberFromString:(NSString *)candidateString {

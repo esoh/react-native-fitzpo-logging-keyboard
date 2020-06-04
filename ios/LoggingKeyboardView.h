@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LoggingKeyboardView : UIView
 
 @property (nonatomic, weak) id <LoggingKeyboardViewDelegate> delegate;
-@property UITextField *textView;
+@property UITextField *textField;
 @property NSNumber* autocompleteValue;
 @property NSNumber* stepValue;
 
