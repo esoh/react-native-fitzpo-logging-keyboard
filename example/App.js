@@ -4,7 +4,7 @@ import { TextInputWithLogger } from 'fitzpo-logging-keyboard';
 
 const App: () => React$Node = () => {
 
-  const [text0, setText0] = useState('')
+  const [text0, setText0] = useState('200')
   const [text1, setText1] = useState('')
   const [text2, setText2] = useState('')
   const [text3, setText3] = useState('')
