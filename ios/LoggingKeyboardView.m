@@ -132,6 +132,7 @@ CGFloat const keyboardHeight = 300;
   }
   number = @(- number.doubleValue);
   textField.text = [number stringValue];
+  [textField sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 - (NSNumber *)getNumberFromString:(NSString *)candidateString {
