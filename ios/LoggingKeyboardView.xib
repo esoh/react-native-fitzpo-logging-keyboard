@@ -27,15 +27,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Avg-gY-R5Y">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdq-u5-h2U">
-                            <rect key="frame" x="386.5" y="9" width="14.5" height="22"/>
-                            <state key="normal" image="chevron.down">
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                            </state>
-                            <connections>
-                                <action selector="hideInputViewButtonPressed:" destination="-1" eventType="touchUpInside" id="nBS-na-8al"/>
-                            </connections>
-                        </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-cQ-a0U">
                             <rect key="frame" x="0.0" y="10" width="280" height="22"/>
                             <subviews>
@@ -62,6 +53,18 @@
                                 </button>
                             </subviews>
                         </stackView>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdq-u5-h2U">
+                            <rect key="frame" x="361" y="0.0" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="fOK-vg-d42"/>
+                            </constraints>
+                            <state key="normal" image="chevron.down">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </state>
+                            <connections>
+                                <action selector="hideInputViewButtonPressed:" destination="-1" eventType="touchUpInside" id="nBS-na-8al"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -72,6 +75,8 @@
                         <constraint firstItem="Xh1-cQ-a0U" firstAttribute="leading" secondItem="Avg-gY-R5Y" secondAttribute="leading" id="ZT9-PY-MOK"/>
                         <constraint firstAttribute="bottom" secondItem="Xh1-cQ-a0U" secondAttribute="bottom" constant="8" id="bDJ-ud-9hy"/>
                         <constraint firstAttribute="height" constant="40" id="dQF-Zv-chy"/>
+                        <constraint firstAttribute="bottom" secondItem="Cdq-u5-h2U" secondAttribute="bottom" id="kvE-ok-YYk"/>
+                        <constraint firstItem="Cdq-u5-h2U" firstAttribute="top" secondItem="Avg-gY-R5Y" secondAttribute="top" id="wdq-Zo-mN0"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCw-AN-59M">
