@@ -23,6 +23,7 @@ const App = () => {
     autocompleteValue={15}
     stepValue={1}
     unit='lbs'
+    onBlur={() => console.log('blur')}
   />
 }
 ```

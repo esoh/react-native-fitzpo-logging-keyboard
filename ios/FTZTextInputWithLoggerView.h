@@ -7,6 +7,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onLeftButtonPress;
 @property (nonatomic, copy) RCTBubblingEventBlock onRightButtonPress;
 @property (nonatomic, copy) RCTBubblingEventBlock onChangeText;
+@property (nonatomic, copy) RCTBubblingEventBlock onBlur;
 
 @property (nonatomic) NSString *value;
 @property (nonatomic) NSString *autocompleteLabel;

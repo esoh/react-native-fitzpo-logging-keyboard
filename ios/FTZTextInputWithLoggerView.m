@@ -115,7 +115,6 @@
     return;
   }
   self.onRightButtonPress(@{});
-
 }
 
 #pragma mark UITextFieldDelegate
@@ -123,6 +122,13 @@
   dispatch_async(dispatch_get_main_queue(), ^{
     [textField selectAll:nil];
   });
+  return YES;
+}
+
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+  if(self.onBlur){
+    self.onBlur(@{});
+  }
   return YES;
 }
 
