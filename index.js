@@ -1,11 +1,13 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { requireNativeComponent, Platform, TextInput } from 'react-native'
 const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger')
 
 const TextInputWithLogger = forwardRef(({ onChangeText, ...attr }, ref) => {
+  const [latestEventTimeStamp, setLatestEventTimeStamp] = useState(0);
   const _onChangeText = (event) => {
-    if (!onChangeText) return;
+    if (!onChangeText || event.timeStamp < latestEventTimeStamp) return;
     onChangeText(event.nativeEvent.text);
+    setLatestEventTimeStamp(event.timeStamp);
   }
   if(Platform.OS === 'ios') {
     return (
