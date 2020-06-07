@@ -67,6 +67,7 @@
   NSLog(@"A00: overriding");
   textField.text = incomingValue;
   value=incomingValue;
+  [textField sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)textFieldDidChange
