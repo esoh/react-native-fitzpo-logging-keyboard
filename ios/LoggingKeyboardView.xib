@@ -32,6 +32,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZz-R1-K0r">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="22"/>
+                                    <inset key="imageEdgeInsets" minX="34" minY="2" maxX="34" maxY="2"/>
                                     <state key="normal" image="plus.slash.minus">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                     </state>
@@ -58,6 +59,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="fOK-vg-d42"/>
                             </constraints>
+                            <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                             <state key="normal" image="chevron.down">
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </state>
@@ -215,6 +217,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mt3-rT-Wox">
                                             <rect key="frame" x="195.5" y="0.0" width="92.5" height="84"/>
+                                            <inset key="imageEdgeInsets" minX="35" minY="22" maxX="35" maxY="22"/>
                                             <state key="normal" image="delete.left.fill">
                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                             </state>
@@ -322,6 +325,7 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oPh-qb-QWc">
                                             <rect key="frame" x="0.0" y="0.0" width="61.5" height="81.5"/>
+                                            <inset key="imageEdgeInsets" minX="22" minY="22" maxX="22" maxY="22"/>
                                             <state key="normal" image="arrow.left"/>
                                             <connections>
                                                 <action selector="leftButtonPressed:" destination="-1" eventType="touchUpInside" id="ljX-Ok-kJT"/>
@@ -329,6 +333,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJf-iO-CAq">
                                             <rect key="frame" x="66.5" y="0.0" width="61.5" height="81.5"/>
+                                            <inset key="imageEdgeInsets" minX="22" minY="22" maxX="22" maxY="22"/>
                                             <state key="normal" image="arrow.right"/>
                                             <connections>
                                                 <action selector="rightButtonPressed:" destination="-1" eventType="touchUpInside" id="IAB-wJ-8DE"/>
@@ -375,10 +380,10 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.left" width="44" height="44"/>
-        <image name="arrow.right" width="44" height="44"/>
-        <image name="chevron.down" width="44" height="44"/>
-        <image name="delete.left.fill" width="44" height="44"/>
-        <image name="plus.slash.minus" width="44" height="44"/>
+        <image name="arrow.left" width="16" height="13"/>
+        <image name="arrow.right" width="16" height="13"/>
+        <image name="chevron.down" width="15" height="8"/>
+        <image name="delete.left.fill" width="18" height="16"/>
+        <image name="plus.slash.minus" width="16" height="16"/>
     </resources>
 </document>
