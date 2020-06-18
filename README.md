@@ -24,6 +24,7 @@ const App = () => {
     stepValue={1}
     unit='lbs'
     onBlur={() => console.log('blur')}
+    onFocus={() => console.log('focus')}
   />
 }
 ```

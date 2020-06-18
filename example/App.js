@@ -30,6 +30,7 @@ const App: () => React$Node = () => {
         autocompleteLabel='Previous Set 3 Target'
         autocompleteValue={115.25}
         unit='lbs'
+        onFocus={() => console.log('focus')}
         onBlur={() => console.log('blur')}
       />
       <TextInputWithLogger

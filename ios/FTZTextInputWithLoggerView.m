@@ -126,7 +126,14 @@
   return YES;
 }
 
-- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+- (BOOL) textFieldDidBeginEditing:(UITextField *)textField {
+  if(self.onFocus){
+    self.onFocus(@{});
+  }
+  return YES;
+}
+
+- (BOOL) textFieldDidEndEditing:(UITextField *)textField {
   if(self.onBlur){
     self.onBlur(@{});
   }
