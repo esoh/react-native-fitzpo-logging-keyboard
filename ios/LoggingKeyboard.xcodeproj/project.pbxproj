@@ -6,6 +6,12 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		091A9866249AC6AD00A275AF /* LoggingKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091A985F249AC6AD00A275AF /* LoggingKeyboardView.m */; };
+		091A9867249AC6AD00A275AF /* FTZTextInputWithLoggerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 091A9862249AC6AD00A275AF /* FTZTextInputWithLoggerManager.m */; };
+		091A9868249AC6AD00A275AF /* FTZTextInputWithLoggerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091A9864249AC6AD00A275AF /* FTZTextInputWithLoggerView.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -19,6 +25,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		091A985E249AC6AD00A275AF /* FTZTextInputWithLoggerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTZTextInputWithLoggerView.h; sourceTree = SOURCE_ROOT; };
+		091A985F249AC6AD00A275AF /* LoggingKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggingKeyboardView.m; sourceTree = SOURCE_ROOT; };
+		091A9860249AC6AD00A275AF /* LoggingKeyboardView.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoggingKeyboardView.xcassets; sourceTree = SOURCE_ROOT; };
+		091A9861249AC6AD00A275AF /* LoggingKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoggingKeyboardView.xib; sourceTree = SOURCE_ROOT; };
+		091A9862249AC6AD00A275AF /* FTZTextInputWithLoggerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTZTextInputWithLoggerManager.m; sourceTree = SOURCE_ROOT; };
+		091A9863249AC6AD00A275AF /* FTZTextInputWithLoggerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTZTextInputWithLoggerManager.h; sourceTree = SOURCE_ROOT; };
+		091A9864249AC6AD00A275AF /* FTZTextInputWithLoggerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTZTextInputWithLoggerView.m; sourceTree = SOURCE_ROOT; };
+		091A9865249AC6AD00A275AF /* LoggingKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggingKeyboardView.h; sourceTree = SOURCE_ROOT; };
 		134814201AA4EA6300B7C361 /* libLoggingKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoggingKeyboard.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -33,6 +47,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		091A985D249AC68D00A275AF /* LoggingKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				091A9863249AC6AD00A275AF /* FTZTextInputWithLoggerManager.h */,
+				091A9862249AC6AD00A275AF /* FTZTextInputWithLoggerManager.m */,
+				091A985E249AC6AD00A275AF /* FTZTextInputWithLoggerView.h */,
+				091A9864249AC6AD00A275AF /* FTZTextInputWithLoggerView.m */,
+				091A9865249AC6AD00A275AF /* LoggingKeyboardView.h */,
+				091A985F249AC6AD00A275AF /* LoggingKeyboardView.m */,
+				091A9860249AC6AD00A275AF /* LoggingKeyboardView.xcassets */,
+				091A9861249AC6AD00A275AF /* LoggingKeyboardView.xib */,
+			);
+			name = LoggingKeyboard;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -44,6 +74,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				091A985D249AC68D00A275AF /* LoggingKeyboard */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				091A9867249AC6AD00A275AF /* FTZTextInputWithLoggerManager.m in Sources */,
+				091A9866249AC6AD00A275AF /* LoggingKeyboardView.m in Sources */,
+				091A9868249AC6AD00A275AF /* FTZTextInputWithLoggerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
