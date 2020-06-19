@@ -119,25 +119,19 @@
 }
 
 #pragma mark UITextFieldDelegate
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [textField selectAll:nil];
-  });
-  return YES;
-}
-
-- (BOOL) textFieldDidBeginEditing:(UITextField *)textField {
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
   if(self.onFocus){
     self.onFocus(@{});
   }
-  return YES;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [textField selectAll:nil];
+  });
 }
 
-- (BOOL) textFieldDidEndEditing:(UITextField *)textField {
+- (void) textFieldDidEndEditing:(UITextField *)textField {
   if(self.onBlur){
     self.onBlur(@{});
   }
-  return YES;
 }
 
 @end
