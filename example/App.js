@@ -26,6 +26,7 @@ const App: () => React$Node = () => {
         style={styles.input}
         value={text0}
         onChangeText={setText0}
+        onLeftButtonPress={() => ref0.current?.blur()}
         onRightButtonPress={() => ref1.current?.focus()}
         autocompleteLabel='Previous Set 3 Target'
         autocompleteValue={115.25}

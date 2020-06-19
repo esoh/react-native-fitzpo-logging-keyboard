@@ -1,8 +1,35 @@
-import React, { forwardRef, useState, useEffect } from 'react'
+import React, { forwardRef, useState, useEffect, useRef } from 'react'
 import { requireNativeComponent, Platform, TextInput } from 'react-native'
 const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger')
 
-const TextInputWithLogger = forwardRef(({ onChangeText, value, ...attr }, ref) => {
+const useCombinedRef = (...refs) => {
+  const combinedRef = useRef();
+
+  useEffect(() => {
+    refs.forEach(ref => {
+      if (!ref) return
+
+      if (typeof ref === 'function') {
+        ref(combinedRef.current)
+      } else {
+        ref.current = combinedRef.current
+      }
+    })
+  }, [refs])
+
+  return combinedRef
+}
+
+const TextInputWithLogger = forwardRef(({
+  onChangeText,
+  value,
+  onFocus,
+  ...attr
+}, ref) => {
+
+  const innerRef = useRef(null)
+  const combinedRef = useCombinedRef(innerRef, ref)
+
   const [latestEventTimeStamp, setLatestEventTimeStamp] = useState(0);
   const [innerValue, setInnerValue] = useState('');
   const _onChangeText = (event) => {
@@ -18,17 +45,29 @@ const TextInputWithLogger = forwardRef(({ onChangeText, value, ...attr }, ref) =
   if(Platform.OS === 'ios') {
     return (
       <FTZTextInputWithLogger
-        ref={ref}
+        ref={combinedRef}
         onChangeText={_onChangeText}
         leftButtonEnabled={!!attr.onLeftButtonPress}
         rightButtonEnabled={!!attr.onRightButtonPress}
         value={innerValue}
+        onFocus={() => {
+          combinedRef.current?.focus();
+          if(!!onFocus) onFocus();
+        }}
         {...attr}
       />
     )
   } else {
     //android is not implemented yet
-    return <TextInput ref={ref} onChangeText={onChangeText} value={value} {...attr}/>
+    return (
+      <TextInput
+        ref={ref}
+        onChangeText={onChangeText}
+        onFocus={onFocus}
+        value={value}
+        {...attr}
+      />
+    )
   }
 });
 
