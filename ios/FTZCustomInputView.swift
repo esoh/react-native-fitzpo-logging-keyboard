@@ -1,6 +1,7 @@
 class FTZCustomInputView : UIView {
 
     weak var target: UITextField?
+    var safeAreaView: UIView?
     var bundle: Bundle
     var primary = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
     var gray5 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -15,6 +16,17 @@ class FTZCustomInputView : UIView {
         bundle = Bundle(path: resourcePath)!
         super.init(frame: .zero)
         initLayout()
+    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        let margins = layoutMarginsGuide
+        safeAreaView?.leadingAnchor.constraint(equalTo:
+        margins.leadingAnchor).isActive = true
+        safeAreaView?.trailingAnchor.constraint(equalTo:
+        margins.trailingAnchor).isActive = true
+        safeAreaView?.bottomAnchor.constraint(equalTo:
+        margins.bottomAnchor).isActive = true
     }
 
     @objc func handlePressChevronDown() {
@@ -102,12 +114,22 @@ class FTZCustomInputView : UIView {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundColor = gray10
 
+        safeAreaView = UIView()
+        addSubview(safeAreaView!)
+        safeAreaView?.translatesAutoresizingMaskIntoConstraints = false
+        safeAreaView?.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        safeAreaView?.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        safeAreaView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        safeAreaView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+
         let topbarView = UIView()
-        topbarView.frame.size.width = bounds.size.width
-        topbarView.frame.size.height = 36
-        topbarView.autoresizingMask = [.flexibleWidth]
+        safeAreaView?.addSubview(topbarView)
+        topbarView.translatesAutoresizingMaskIntoConstraints = false
         topbarView.backgroundColor = gray5
-        addSubview(topbarView)
+        topbarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        topbarView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        topbarView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        topbarView.heightAnchor.constraint(equalToConstant: 36).isActive = true
 
         topbarView.addSubview(plusMinusButton)
         plusMinusButton.translatesAutoresizingMaskIntoConstraints = false
@@ -122,12 +144,12 @@ class FTZCustomInputView : UIView {
         chevronDownButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
 
         let mainView = UIView()
-        addSubview(mainView)
+        safeAreaView?.addSubview(mainView)
         mainView.translatesAutoresizingMaskIntoConstraints = false
-        mainView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        mainView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        mainView.leadingAnchor.constraint(equalTo: safeAreaView!.leadingAnchor, constant: 0).isActive = true
+        mainView.trailingAnchor.constraint(equalTo: safeAreaView!.trailingAnchor, constant: 0).isActive = true
         mainView.topAnchor.constraint(equalTo: topbarView.bottomAnchor, constant: 0).isActive = true
-        mainView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        mainView.bottomAnchor.constraint(equalTo: safeAreaView!.bottomAnchor, constant: 0).isActive = true
         mainView.backgroundColor = gray10
 
         let keypadView = UIStackView()
