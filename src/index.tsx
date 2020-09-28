@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { requireNativeComponent } from 'react-native';
 
 type TextInputWithLoggerProps = {
@@ -13,14 +13,18 @@ const TextInputWithLogger = ({
   onChangeText,
   ...props
 }: TextInputWithLoggerProps) => {
-  const handleChange = e => {
+  const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
+
+  const handleChange = (e) => {
     onChangeText && onChangeText(e.nativeEvent.text);
+    setMostRecentEventCount(e.nativeEvent.eventCount);
   };
 
   return (
     <FTZTextInputWithLogger
       onChange={e => handleChange(e)}
       text={value}
+      mostRecentEventCount={mostRecentEventCount}
       {...props}
     />
   );
