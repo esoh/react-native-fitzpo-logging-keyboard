@@ -1,16 +1,11 @@
-class DigitButton: UIButton {
-    var digit: Int = 0
-}
-
 class FTZCustomInputView : UIView {
+    /*
 
     var numericButtons: [DigitButton] = (0...9).map {
         let button = DigitButton(type: .system)
         button.digit = $0
         button.setTitle("\($0)", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.darkGray.cgColor
         button.accessibilityTraits = [.keyboardKey]
         return button
     }
@@ -37,10 +32,58 @@ class FTZCustomInputView : UIView {
         button.accessibilityLabel = decimalSeparator
         return button
     }()
+    */
 
-    init() {
+    weak var target: UITextField?
+
+    init(targetTextField: UITextField) {
         super.init(frame: .zero)
-        configure()
+        target = targetTextField
+        initLayout()
+    }
+
+    @objc func handlePressChevronDown() {
+        target?.resignFirstResponder()
+    }
+
+    lazy var plusMinusButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "plus.slash.minus"), for: .normal);
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        button.backgroundColor = UIColor.red
+        return button
+    }()
+
+    lazy var chevronDownButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "chevron.down"), for: .normal);
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(handlePressChevronDown), for: .touchUpInside)
+        return button
+    }()
+
+    func initLayout() {
+        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        let topbarView = UIView();
+        topbarView.frame.size.width = bounds.size.width
+        topbarView.frame.size.height = 36
+        topbarView.autoresizingMask = [.flexibleWidth]
+        topbarView.backgroundColor = UIColor.cyan
+        addSubview(topbarView);
+
+        topbarView.addSubview(plusMinusButton);
+        plusMinusButton.translatesAutoresizingMaskIntoConstraints = false
+        plusMinusButton.leadingAnchor.constraint(equalTo: topbarView.leadingAnchor, constant: 5).isActive = true
+        plusMinusButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
+
+        topbarView.addSubview(chevronDownButton);
+        chevronDownButton.translatesAutoresizingMaskIntoConstraints = false
+        chevronDownButton.trailingAnchor.constraint(equalTo: topbarView.trailingAnchor, constant: -5).isActive = true
+        chevronDownButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
     }
 
     required init?(coder: NSCoder) {
@@ -48,6 +91,7 @@ class FTZCustomInputView : UIView {
     }
 }
 
+/*
 private extension FTZCustomInputView {
     func configure() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -89,3 +133,4 @@ private extension FTZCustomInputView {
         return stackView
     }
 }
+*/
