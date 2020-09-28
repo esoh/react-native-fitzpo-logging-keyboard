@@ -1,41 +1,10 @@
 class FTZCustomInputView : UIView {
-    /*
-
-    var numericButtons: [DigitButton] = (0...9).map {
-        let button = DigitButton(type: .system)
-        button.digit = $0
-        button.setTitle("\($0)", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.accessibilityTraits = [.keyboardKey]
-        return button
-    }
-
-    var deleteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("⌫", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.darkGray.cgColor
-        button.accessibilityTraits = [.keyboardKey]
-        button.accessibilityLabel = "Delete"
-        return button
-    }()
-
-    lazy var decimalButton: UIButton = {
-        let button = UIButton(type: .system)
-        let decimalSeparator = Locale.current.decimalSeparator ?? "."
-        button.setTitle(decimalSeparator, for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.darkGray.cgColor
-        button.accessibilityTraits = [.keyboardKey]
-        button.accessibilityLabel = decimalSeparator
-        return button
-    }()
-    */
 
     weak var target: UITextField?
     var bundle: Bundle
+    var primary = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
+    var gray5 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    var gray10 = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
 
     init(targetTextField: UITextField) {
         target = targetTextField
@@ -78,9 +47,9 @@ class FTZCustomInputView : UIView {
     lazy var plusMinusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus.slash.minus", in: bundle, compatibleWith: nil), for: .normal);
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.darkGray.cgColor
-        button.tintColor = UIColor.black
+        button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        button.imageView!.contentMode = .scaleAspectFit;
+        button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressPlusMinus), for: .touchUpInside)
         return button
     }()
@@ -88,32 +57,35 @@ class FTZCustomInputView : UIView {
     lazy var chevronDownButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "chevron.down", in: bundle, compatibleWith: nil), for: .normal);
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.darkGray.cgColor
-        button.tintColor = UIColor.black
+        button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        button.imageView!.contentMode = .scaleAspectFit;
+        button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressChevronDown), for: .touchUpInside)
         return button
     }()
 
     func initLayout() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundColor = gray10
 
         let topbarView = UIView();
         topbarView.frame.size.width = bounds.size.width
         topbarView.frame.size.height = 36
         topbarView.autoresizingMask = [.flexibleWidth]
-        topbarView.backgroundColor = UIColor.cyan
+        topbarView.backgroundColor = gray5
         addSubview(topbarView);
 
         topbarView.addSubview(plusMinusButton);
         plusMinusButton.translatesAutoresizingMaskIntoConstraints = false
         plusMinusButton.leadingAnchor.constraint(equalTo: topbarView.leadingAnchor, constant: 5).isActive = true
         plusMinusButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
+        plusMinusButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
 
         topbarView.addSubview(chevronDownButton);
         chevronDownButton.translatesAutoresizingMaskIntoConstraints = false
         chevronDownButton.trailingAnchor.constraint(equalTo: topbarView.trailingAnchor, constant: -5).isActive = true
         chevronDownButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
+        chevronDownButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
     }
 
     required init?(coder: NSCoder) {
