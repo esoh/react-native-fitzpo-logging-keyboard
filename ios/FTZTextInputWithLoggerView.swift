@@ -4,6 +4,7 @@ class FTZTextInputWithLoggerView: RCTSinglelineTextInputView, UITextFieldDelegat
     
     override init(bridge: RCTBridge) {
         super.init(bridge: bridge)
+        (self.backedTextInputView as! UITextField).inputView = FTZCustomInputView();
     }
     
     override func didMoveToSuperview() {
