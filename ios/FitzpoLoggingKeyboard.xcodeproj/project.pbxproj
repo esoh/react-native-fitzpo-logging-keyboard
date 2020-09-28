@@ -25,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		09AC9A9E252164F40035E914 /* FTZCustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTZCustomInputView.swift; sourceTree = "<group>"; };
+		09AC9B1C2522397E0035E914 /* FTZLoggingKeyboard.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FTZLoggingKeyboard.xcassets; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libFitzpoLoggingKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFitzpoLoggingKeyboard.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5891CC2AC0600A0062D /* FTZTextInputWithLoggerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTZTextInputWithLoggerManager.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* FitzpoLoggingKeyboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FitzpoLoggingKeyboard-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				09AC9B1C2522397E0035E914 /* FTZLoggingKeyboard.xcassets */,
 				09AC9A9E252164F40035E914 /* FTZCustomInputView.swift */,
 				F4FF95D6245B92E800C19C63 /* FTZTextInputWithLoggerView.swift */,
 				B3E7B5891CC2AC0600A0062D /* FTZTextInputWithLoggerManager.m */,

@@ -35,10 +35,16 @@ class FTZCustomInputView : UIView {
     */
 
     weak var target: UITextField?
+    var bundle: Bundle
 
     init(targetTextField: UITextField) {
-        super.init(frame: .zero)
         target = targetTextField
+        let resourcePath = Bundle.main.path(
+            forResource: "Resources",
+            ofType: "bundle"
+        )!
+        bundle = Bundle(path: resourcePath)!
+        super.init(frame: .zero)
         initLayout()
     }
 
@@ -71,20 +77,20 @@ class FTZCustomInputView : UIView {
 
     lazy var plusMinusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "plus.slash.minus"), for: .normal);
+        button.setImage(UIImage(named: "plus.slash.minus", in: bundle, compatibleWith: nil), for: .normal);
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.darkGray.cgColor
-        button.backgroundColor = UIColor.red
+        button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressPlusMinus), for: .touchUpInside)
         return button
     }()
 
     lazy var chevronDownButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "chevron.down"), for: .normal);
+        button.setImage(UIImage(named: "chevron.down", in: bundle, compatibleWith: nil), for: .normal);
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.darkGray.cgColor
-        button.backgroundColor = UIColor.blue
+        button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressChevronDown), for: .touchUpInside)
         return button
     }()
