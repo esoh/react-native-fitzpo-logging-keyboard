@@ -46,12 +46,36 @@ class FTZCustomInputView : UIView {
         target?.resignFirstResponder()
     }
 
+    @objc func handlePressPlusMinus() {
+        let number = getNumberFromText(text: target?.text)
+        if(number == nil){
+            return;
+        }
+
+        let hasDecimal = target?.text!.contains(".") ?? false
+        if (!hasDecimal) {
+            target?.text = String(Int(-number!))
+        } else {
+            target?.text = String(-number!)
+        }
+        target?.sendActions(for: .editingChanged)
+    }
+
+    func getNumberFromText(text: String?) -> Double? {
+        if let cost = Double(text!) {
+            return cost;
+        } else {
+            return nil;
+        }
+    }
+
     lazy var plusMinusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus.slash.minus"), for: .normal);
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.darkGray.cgColor
         button.backgroundColor = UIColor.red
+        button.addTarget(self, action: #selector(handlePressPlusMinus), for: .touchUpInside)
         return button
     }()
 
