@@ -24,7 +24,7 @@ class FTZCustomInputView : UIView {
     @objc func handlePressPlusMinus() {
         let number = getNumberFromText(text: target?.text)
         if(number == nil){
-            return;
+            return
         }
 
         let hasDecimal = target?.text!.contains(".") ?? false
@@ -36,19 +36,27 @@ class FTZCustomInputView : UIView {
         target?.sendActions(for: .editingChanged)
     }
 
+    @objc func handlePressKey(sender: UIButton) {
+        target?.insertText(sender.title(for: .normal)!)
+    }
+
+    @objc func handlePressBackspace() {
+        target?.deleteBackward()
+    }
+
     func getNumberFromText(text: String?) -> Double? {
         if let cost = Double(text!) {
-            return cost;
+            return cost
         } else {
-            return nil;
+            return nil
         }
     }
 
     lazy var plusMinusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "plus.slash.minus", in: bundle, compatibleWith: nil), for: .normal);
+        button.setImage(UIImage(named: "plus.slash.minus", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.imageView!.contentMode = .scaleAspectFit;
+        button.imageView!.contentMode = .scaleAspectFit
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressPlusMinus), for: .touchUpInside)
         return button
@@ -56,36 +64,113 @@ class FTZCustomInputView : UIView {
 
     lazy var chevronDownButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "chevron.down", in: bundle, compatibleWith: nil), for: .normal);
+        button.setImage(UIImage(named: "chevron.down", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.imageView!.contentMode = .scaleAspectFit;
+        button.imageView!.contentMode = .scaleAspectFit
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressChevronDown), for: .touchUpInside)
         return button
     }()
 
+    lazy var backspaceButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "delete.left.fill", in: bundle, compatibleWith: nil), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        button.imageView!.contentMode = .scaleAspectFit
+        button.tintColor = primary
+        button.addTarget(self, action: #selector(handlePressBackspace), for: .touchUpInside)
+        return button
+    }()
+
+    lazy var decimalButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(".", for: .normal)
+        button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
+        return button
+    }()
+
+    func createKeyButton(key: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(key, for: .normal)
+        button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
+        return button
+    }
+
     func initLayout() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundColor = gray10
 
-        let topbarView = UIView();
+        let topbarView = UIView()
         topbarView.frame.size.width = bounds.size.width
         topbarView.frame.size.height = 36
         topbarView.autoresizingMask = [.flexibleWidth]
         topbarView.backgroundColor = gray5
-        addSubview(topbarView);
+        addSubview(topbarView)
 
-        topbarView.addSubview(plusMinusButton);
+        topbarView.addSubview(plusMinusButton)
         plusMinusButton.translatesAutoresizingMaskIntoConstraints = false
         plusMinusButton.leadingAnchor.constraint(equalTo: topbarView.leadingAnchor, constant: 5).isActive = true
         plusMinusButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
         plusMinusButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
 
-        topbarView.addSubview(chevronDownButton);
+        topbarView.addSubview(chevronDownButton)
         chevronDownButton.translatesAutoresizingMaskIntoConstraints = false
         chevronDownButton.trailingAnchor.constraint(equalTo: topbarView.trailingAnchor, constant: -5).isActive = true
         chevronDownButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
         chevronDownButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
+
+        let mainView = UIView()
+        addSubview(mainView)
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        mainView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        mainView.topAnchor.constraint(equalTo: topbarView.bottomAnchor, constant: 0).isActive = true
+        mainView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        mainView.backgroundColor = gray10
+
+        let keypadView = UIStackView()
+        mainView.addSubview(keypadView)
+        keypadView.translatesAutoresizingMaskIntoConstraints = false
+        keypadView.axis = .horizontal
+        keypadView.alignment = .fill
+        keypadView.distribution = .fillEqually
+        keypadView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 0).isActive = true
+        keypadView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: 0).isActive = true
+        keypadView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 0).isActive = true
+        keypadView.widthAnchor.constraint(equalTo: mainView.widthAnchor, multiplier: 0.64).isActive = true
+
+        let firstColView = UIStackView()
+        keypadView.addArrangedSubview(firstColView)
+        firstColView.axis = .vertical
+        firstColView.alignment = .fill
+        firstColView.distribution = .fillEqually
+        for key in ["1", "4", "7"] {
+            firstColView.addArrangedSubview(createKeyButton(key: key))
+        }
+        firstColView.addArrangedSubview(decimalButton)
+
+        let secondColView = UIStackView()
+        keypadView.addArrangedSubview(secondColView)
+        secondColView.axis = .vertical
+        secondColView.alignment = .fill
+        secondColView.distribution = .fillEqually
+
+        for key in ["2", "5", "8", "0"] {
+            secondColView.addArrangedSubview(createKeyButton(key: key))
+        }
+
+        let thirdColView = UIStackView()
+        keypadView.addArrangedSubview(thirdColView)
+        thirdColView.axis = .vertical
+        thirdColView.alignment = .fill
+        thirdColView.distribution = .fillEqually
+
+        for key in ["3", "6", "9"] {
+            thirdColView.addArrangedSubview(createKeyButton(key: key))
+        }
+        thirdColView.addArrangedSubview(backspaceButton)
     }
 
     required init?(coder: NSCoder) {
