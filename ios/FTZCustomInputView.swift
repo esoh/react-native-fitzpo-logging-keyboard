@@ -91,6 +91,8 @@ class FTZCustomInputView : UIView {
         button.imageView!.contentMode = .scaleAspectFit
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressBackspace), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }()
 
@@ -99,6 +101,8 @@ class FTZCustomInputView : UIView {
         button.setTitle(".", for: .normal)
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }()
 
@@ -107,6 +111,8 @@ class FTZCustomInputView : UIView {
         button.setTitle(key, for: .normal)
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }
 
@@ -167,7 +173,7 @@ class FTZCustomInputView : UIView {
         keypadView.addArrangedSubview(firstColView)
         firstColView.axis = .vertical
         firstColView.alignment = .fill
-        firstColView.distribution = .fillEqually
+        firstColView.distribution = .equalSpacing
         for key in ["1", "4", "7"] {
             firstColView.addArrangedSubview(createKeyButton(key: key))
         }
@@ -177,7 +183,7 @@ class FTZCustomInputView : UIView {
         keypadView.addArrangedSubview(secondColView)
         secondColView.axis = .vertical
         secondColView.alignment = .fill
-        secondColView.distribution = .fillEqually
+        secondColView.distribution = .equalSpacing
 
         for key in ["2", "5", "8", "0"] {
             secondColView.addArrangedSubview(createKeyButton(key: key))
@@ -187,7 +193,7 @@ class FTZCustomInputView : UIView {
         keypadView.addArrangedSubview(thirdColView)
         thirdColView.axis = .vertical
         thirdColView.alignment = .fill
-        thirdColView.distribution = .fillEqually
+        thirdColView.distribution = .equalSpacing
 
         for key in ["3", "6", "9"] {
             thirdColView.addArrangedSubview(createKeyButton(key: key))
