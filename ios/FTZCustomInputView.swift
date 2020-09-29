@@ -47,7 +47,19 @@ class FTZCustomInputView : UIView {
     }
 
     @objc func handlePressKey(sender: UIButton) {
-        target?.insertText(sender.title(for: .normal)!)
+        let replacementString = sender.title(for: .normal)!
+
+        if let range = target?.selectedTextRange {
+            let location = target!.offset(from: target!.beginningOfDocument, to: range.start)
+            let length = target!.offset(from: range.start, to: range.end)
+            let range = Range(NSRange(location: location, length: length), in: target!.text!)!
+
+            let updatedText = target!.text!.replacingCharacters(in: range, with: replacementString)
+            if (updatedText.filter { $0 == "." }.count > 1) {
+                return
+            }
+        }
+        target?.insertText(replacementString)
     }
 
     @objc func handlePressBackspace() {
