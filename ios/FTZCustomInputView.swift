@@ -161,7 +161,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressPrev), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }
 
@@ -173,7 +173,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressNext), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }
 
@@ -184,7 +184,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }
 
@@ -195,7 +195,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }
 
@@ -317,19 +317,23 @@ class FTZCustomInputView : UIView {
         incDecButtonsView.translatesAutoresizingMaskIntoConstraints = false
         incDecButtonsView.axis = .horizontal
         incDecButtonsView.alignment = .fill
-        incDecButtonsView.distribution = .fillEqually
+        incDecButtonsView.distribution = .equalSpacing
 
         decrementButton = createDecrementButton()
         incrementButton = createIncrementButton()
         incDecButtonsView.addArrangedSubview(decrementButton!)
         incDecButtonsView.addArrangedSubview(incrementButton!)
+        incDecButtonsView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        incDecButtonsView.isLayoutMarginsRelativeArrangement = true
 
         let prevNextButtonsView = UIStackView()
         sideButtonsView.addArrangedSubview(prevNextButtonsView)
         prevNextButtonsView.translatesAutoresizingMaskIntoConstraints = false
         prevNextButtonsView.axis = .horizontal
         prevNextButtonsView.alignment = .fill
-        prevNextButtonsView.distribution = .fillEqually
+        prevNextButtonsView.distribution = .equalSpacing
+        prevNextButtonsView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        prevNextButtonsView.isLayoutMarginsRelativeArrangement = true
 
         leftButton = createLeftButton()
         rightButton = createRightButton()
