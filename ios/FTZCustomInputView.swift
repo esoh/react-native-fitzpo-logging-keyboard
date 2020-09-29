@@ -21,12 +21,10 @@ class FTZCustomInputView : UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         let margins = layoutMarginsGuide
-        safeAreaView?.leadingAnchor.constraint(equalTo:
-        margins.leadingAnchor).isActive = true
-        safeAreaView?.trailingAnchor.constraint(equalTo:
-        margins.trailingAnchor).isActive = true
-        safeAreaView?.bottomAnchor.constraint(equalTo:
-        margins.bottomAnchor).isActive = true
+        safeAreaView?.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        safeAreaView?.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        safeAreaView?.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 0).isActive = true
+        safeAreaView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
     }
 
     @objc func handlePressChevronDown() {
@@ -123,10 +121,6 @@ class FTZCustomInputView : UIView {
         safeAreaView = UIView()
         addSubview(safeAreaView!)
         safeAreaView?.translatesAutoresizingMaskIntoConstraints = false
-        safeAreaView?.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        safeAreaView?.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-        safeAreaView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        safeAreaView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
 
         let topbarView = UIView()
         safeAreaView?.addSubview(topbarView)
