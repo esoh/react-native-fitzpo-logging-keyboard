@@ -11,6 +11,11 @@ const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger');
 const TextInputWithLogger = ({
   value,
   onChangeText,
+  onLeftButtonPress,
+  isLeftButtonDisabled,
+  onRightButtonPress,
+  isRightButtonDisabled,
+  stepValue,
   ...props
 }: TextInputWithLoggerProps) => {
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
@@ -26,6 +31,11 @@ const TextInputWithLogger = ({
       text={value}
       mostRecentEventCount={mostRecentEventCount}
       {...props}
+      onLeftButtonPress={onLeftButtonPress}
+      isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
+      onRightButtonPress={onRightButtonPress}
+      isRightButtonDisabled={isRightButtonDisabled ?? !onRightButtonPress}
+      stepValue={stepValue}
     />
   );
 };

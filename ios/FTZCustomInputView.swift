@@ -1,7 +1,22 @@
+protocol FTZCustomInputViewDelegate {
+    // protocol definition goes here
+    func leftButtonPressed()
+    func rightButtonPressed()
+}
+
+class ValuedButton: UIButton {
+    var value: Double = 0
+}
+
 class FTZCustomInputView : UIView {
 
     weak var target: UITextField?
+    var delegate: FTZCustomInputViewDelegate?
     var safeAreaView: UIView?
+    var leftButton: UIButton?
+    var rightButton: UIButton?
+    var decrementButton: ValuedButton?
+    var incrementButton: ValuedButton?
     var bundle: Bundle
     var primary = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
     var gray5 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -29,6 +44,14 @@ class FTZCustomInputView : UIView {
 
     @objc func handlePressChevronDown() {
         target?.resignFirstResponder()
+    }
+
+    @objc func handlePressPrev() {
+        delegate?.leftButtonPressed()
+    }
+
+    @objc func handlePressNext() {
+        delegate?.rightButtonPressed()
     }
 
     @objc func handlePressPlusMinus() {
@@ -60,6 +83,20 @@ class FTZCustomInputView : UIView {
             }
         }
         target?.insertText(replacementString)
+    }
+
+    func formatAsString(_ val: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 3
+        return formatter.string(from: NSNumber(value: val))!
+    }
+
+    @objc func handlePressStep(sender: ValuedButton) {
+        let number = getNumberFromText(text: target?.text) ?? 0;
+
+        target?.text = formatAsString(number + sender.value)
+        target?.sendActions(for: .editingChanged)
     }
 
     @objc func handlePressBackspace() {
@@ -115,6 +152,52 @@ class FTZCustomInputView : UIView {
         button.heightAnchor.constraint(equalToConstant: 46).isActive = true
         return button
     }()
+
+    func createLeftButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "arrow.left", in: bundle, compatibleWith: nil), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        button.imageView!.contentMode = .scaleAspectFit
+        button.tintColor = primary
+        button.addTarget(self, action: #selector(handlePressPrev), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        return button
+    }
+
+    func createRightButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "arrow.right", in: bundle, compatibleWith: nil), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        button.imageView!.contentMode = .scaleAspectFit
+        button.tintColor = primary
+        button.addTarget(self, action: #selector(handlePressNext), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        return button
+    }
+
+    func createDecrementButton() -> ValuedButton {
+        let button = ValuedButton(type: .system)
+        button.value = -1
+        button.setTitle("-1", for: .normal)
+        button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        return button
+    }
+
+    func createIncrementButton() -> ValuedButton {
+        let button = ValuedButton(type: .system)
+        button.value = 1
+        button.setTitle("+1", for: .normal)
+        button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        return button
+    }
 
     func createKeyButton(key: String) -> UIButton {
         let button = UIButton(type: .system)
@@ -205,6 +288,53 @@ class FTZCustomInputView : UIView {
             thirdColView.addArrangedSubview(createKeyButton(key: key))
         }
         thirdColView.addArrangedSubview(backspaceButton)
+
+        let sideView = UIStackView()
+        mainView.addSubview(sideView)
+        sideView.translatesAutoresizingMaskIntoConstraints = false
+        sideView.axis = .vertical
+        sideView.alignment = .fill
+        sideView.distribution = .fillEqually
+        sideView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 0).isActive = true
+        sideView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: 0).isActive = true
+        sideView.leadingAnchor.constraint(equalTo: keypadView.trailingAnchor, constant: 0).isActive = true
+        sideView.trailingAnchor.constraint(equalTo: safeAreaView!.trailingAnchor, constant: 0).isActive = true
+
+        let autofillView = UIView()
+        sideView.addArrangedSubview(autofillView)
+        autofillView.translatesAutoresizingMaskIntoConstraints = false
+        autofillView.backgroundColor = UIColor.blue
+
+        let sideButtonsView = UIStackView()
+        sideView.addArrangedSubview(sideButtonsView)
+        sideButtonsView.translatesAutoresizingMaskIntoConstraints = false
+        sideButtonsView.axis = .vertical
+        sideButtonsView.alignment = .fill
+        sideButtonsView.distribution = .fillEqually
+
+        let incDecButtonsView = UIStackView()
+        sideButtonsView.addArrangedSubview(incDecButtonsView)
+        incDecButtonsView.translatesAutoresizingMaskIntoConstraints = false
+        incDecButtonsView.axis = .horizontal
+        incDecButtonsView.alignment = .fill
+        incDecButtonsView.distribution = .fillEqually
+
+        decrementButton = createDecrementButton()
+        incrementButton = createIncrementButton()
+        incDecButtonsView.addArrangedSubview(decrementButton!)
+        incDecButtonsView.addArrangedSubview(incrementButton!)
+
+        let prevNextButtonsView = UIStackView()
+        sideButtonsView.addArrangedSubview(prevNextButtonsView)
+        prevNextButtonsView.translatesAutoresizingMaskIntoConstraints = false
+        prevNextButtonsView.axis = .horizontal
+        prevNextButtonsView.alignment = .fill
+        prevNextButtonsView.distribution = .fillEqually
+
+        leftButton = createLeftButton()
+        rightButton = createRightButton()
+        prevNextButtonsView.addArrangedSubview(leftButton!)
+        prevNextButtonsView.addArrangedSubview(rightButton!)
     }
 
     required init?(coder: NSCoder) {
