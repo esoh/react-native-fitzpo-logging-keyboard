@@ -43,9 +43,20 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
 
     // MARK: - UITextFieldDelegate
 
+    @objc var onFocus: RCTDirectEventBlock?
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if onFocus != nil {
+            onFocus!(nil)
+        }
         DispatchQueue.main.async {
             textField.selectAll(nil);
+        }
+    }
+
+    @objc var onBlur: RCTDirectEventBlock?
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if onBlur != nil {
+            onBlur!(nil)
         }
     }
 

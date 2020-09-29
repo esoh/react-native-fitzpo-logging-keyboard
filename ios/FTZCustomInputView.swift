@@ -156,24 +156,24 @@ class FTZCustomInputView : UIView {
     func createLeftButton() -> UIButton {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "arrow.left", in: bundle, compatibleWith: nil), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         button.imageView!.contentMode = .scaleAspectFit
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressPrev), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }
 
     func createRightButton() -> UIButton {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "arrow.right", in: bundle, compatibleWith: nil), for: .normal)
-        button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         button.imageView!.contentMode = .scaleAspectFit
         button.tintColor = primary
         button.addTarget(self, action: #selector(handlePressNext), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }
 
@@ -184,7 +184,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }
 
@@ -195,7 +195,7 @@ class FTZCustomInputView : UIView {
         button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }
 

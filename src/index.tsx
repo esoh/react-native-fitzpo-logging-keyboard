@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useRef, useEffect } from 'react';
 import { requireNativeComponent } from 'react-native';
 
 type TextInputWithLoggerProps = {
@@ -8,7 +8,25 @@ type TextInputWithLoggerProps = {
 
 const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger');
 
-const TextInputWithLogger = ({
+const useCombinedRef = (...refs) => {
+  const combinedRef = useRef();
+
+  useEffect(() => {
+    refs.forEach(ref => {
+      if (!ref) return
+
+      if (typeof ref === 'function') {
+        ref(combinedRef.current)
+      } else {
+        ref.current = combinedRef.current
+      }
+    })
+  }, [refs])
+
+  return combinedRef
+}
+
+const TextInputWithLogger = forwardRef(({
   value,
   onChangeText,
   onLeftButtonPress,
@@ -16,8 +34,10 @@ const TextInputWithLogger = ({
   onRightButtonPress,
   isRightButtonDisabled,
   stepValue,
+  onFocus,
+  onBlur,
   ...props
-}: TextInputWithLoggerProps) => {
+}, ref) => {
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
 
   const handleChange = (e) => {
@@ -25,19 +45,31 @@ const TextInputWithLogger = ({
     setMostRecentEventCount(e.nativeEvent.eventCount);
   };
 
+  const innerRef = useRef(null)
+  const combinedRef = useCombinedRef(innerRef, ref)
+
   return (
     <FTZTextInputWithLogger
+      ref={combinedRef}
       onChange={e => handleChange(e)}
       text={value}
-      mostRecentEventCount={mostRecentEventCount}
-      {...props}
-      onLeftButtonPress={onLeftButtonPress}
-      isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
+      stepValue={stepValue}
       onRightButtonPress={onRightButtonPress}
       isRightButtonDisabled={isRightButtonDisabled ?? !onRightButtonPress}
-      stepValue={stepValue}
+      onLeftButtonPress={onLeftButtonPress}
+      isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
+      onFocus={() => {
+        combinedRef.current?.focus();
+        if(onFocus) onFocus();
+      }}
+      onBlur={() => {
+        combinedRef.current?.blur();
+        if(onBlur) onBlur();
+      }}
+      mostRecentEventCount={mostRecentEventCount}
+      {...props}
     />
   );
-};
+});
 
 export default TextInputWithLogger;
