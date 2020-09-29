@@ -17,12 +17,14 @@ const App = () => {
     ref={ref}
     onChangeText={text => setState(text)}
     value={text}
-    onLeftButtonPress={() => console.log('do stuff')}
-    onRightButtonPress={() => console.log('do stuff')}
     autocompleteLabel='testing'
     autocompleteValue={15}
+    unitLabel='lbs'
     stepValue={1}
-    unit='lbs'
+    isLeftButtonDisabled
+    onLeftButtonPress={() => console.log('do stuff')}
+    isRightButtonDisabled
+    onRightButtonPress={() => console.log('do stuff')}
     onBlur={() => console.log('blur')}
     onFocus={() => console.log('focus')}
   />
