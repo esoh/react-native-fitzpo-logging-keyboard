@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState, forwardRef, useRef, useEffect } from 'react';
-import { requireNativeComponent } from 'react-native';
+import { requireNativeComponent, Platform, TextInput } from 'react-native';
 
 type TextInputWithLoggerProps = {
   value?: string;
@@ -79,4 +79,4 @@ const TextInputWithLogger = forwardRef(({
   );
 });
 
-export default TextInputWithLogger;
+export default Platform.OS === 'ios' ? TextInputWithLogger : TextInput
