@@ -17,21 +17,16 @@ const App = () => {
     ref={ref}
     onChangeText={text => setState(text)}
     value={text}
-    onLeftButtonPress={() => console.log('do stuff')}
-    onRightButtonPress={() => console.log('do stuff')}
-    autocompleteLabel='testing'
-    autocompleteValue={15}
+    suggestLabel='testing'
+    suggestValue={15}
+    unitLabel='lbs'
     stepValue={1}
-    unit='lbs'
+    isLeftButtonDisabled
+    onLeftButtonPress={() => console.log('do stuff')}
+    isRightButtonDisabled
+    onRightButtonPress={() => console.log('do stuff')}
     onBlur={() => console.log('blur')}
     onFocus={() => console.log('focus')}
   />
 }
 ```
-
-### Important things to note
-Changing react-native value prop will update the native value, which will then trigger the onChangeText.
-
-Any change you make in the text field will trigger onChangeText as well.
-
-It is expected that onChangeText will modify the value that is being passed in by the value prop.
