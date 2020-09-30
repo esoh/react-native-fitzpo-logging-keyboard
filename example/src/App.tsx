@@ -9,6 +9,7 @@ export default function App() {
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
 
   const inputRef = useRef();
+  const inputRef2 = useRef();
 
   console.log(text);
   console.log(isRightButtonDisabled);
@@ -24,11 +25,23 @@ export default function App() {
         onChangeText={text => setText(text)}
         value={text}
         isRightButtonDisabled={isRightButtonDisabled}
-        onRightButtonPress={() => console.log('right', isRightButtonDisabled)}
+        onRightButtonPress={() => inputRef2.current?.focus()}
         stepValue={2.5}
         onFocus={() => console.log('focus')}
         suggestLabel='Target'
         unitLabel='lbs'
+        suggestValue={15}
+      />
+      <TextInputWithLogger
+        ref={inputRef2}
+        style={{ width: 120, backgroundColor: 'gray' }}
+        onChangeText={text => setText(text)}
+        value={text}
+        stepValue={2.5}
+        onFocus={() => console.log('focus')}
+        suggestLabel='Target'
+        unitLabel='lbs'
+        onLeftButtonPress={() => inputRef.current?.focus()}
         suggestValue={15}
       />
     </View>
