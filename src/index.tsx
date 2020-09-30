@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, forwardRef, useRef, useEffect } from 'react';
 import { requireNativeComponent } from 'react-native';
 

@@ -1,15 +1,15 @@
+// @ts-nocheck
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import TextInputWithLogger from 'react-native-fitzpo-logging-keyboard';
 
 export default function App() {
-
   const [text, setText] = useState('test');
 
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
 
-  const inputRef = useRef();
-  const inputRef2 = useRef();
+  const inputRef = useRef<TextInput>();
+  const inputRef2 = useRef<TextInput>();
 
   console.log(text);
   console.log(isRightButtonDisabled);
@@ -18,7 +18,7 @@ export default function App() {
     <View style={styles.container}>
       <Button title='toggle right enable' onPress={() =>
         setIsRightButtonDisabled(val => !val)}/>
-      <Button title='focus' onPress={() => inputRef.current.focus()}/>
+      <Button title='focus' onPress={() => inputRef.current?.focus()}/>
       <TextInputWithLogger
         ref={inputRef}
         style={{ width: 120, backgroundColor: 'gray' }}
