@@ -14,6 +14,10 @@ RCT_EXPORT_VIEW_PROPERTY(stepValue, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(onFocus, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onBlur, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(suggestLabel, NSString)
+RCT_EXPORT_VIEW_PROPERTY(suggestValue, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(unitLabel, NSString)
 @end
 
 

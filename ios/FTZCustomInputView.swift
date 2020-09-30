@@ -12,6 +12,9 @@ class FTZCustomInputView : UIView {
 
     weak var target: UITextField?
     var delegate: FTZCustomInputViewDelegate?
+    var suggestLabel: UILabel? // TODO implement with default ""
+    var suggestButton: UIButton? // TODO implement with default "-" disabled
+    var unitLabel: UILabel? // TODO implement with default ""
     var safeAreaView: UIView?
     var leftButton: UIButton?
     var rightButton: UIButton?
@@ -21,6 +24,7 @@ class FTZCustomInputView : UIView {
     var primary = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
     var gray5 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     var gray10 = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+    var gray50 = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
     init(targetTextField: UITextField) {
         target = targetTextField
@@ -83,6 +87,11 @@ class FTZCustomInputView : UIView {
             }
         }
         target?.insertText(replacementString)
+    }
+
+    @objc func handlePressSuggest(sender: UIButton) {
+        target?.text = sender.title(for: .normal)
+        target?.sendActions(for: .editingChanged)
     }
 
     func formatAsString(_ val: Double) -> String {
@@ -209,6 +218,17 @@ class FTZCustomInputView : UIView {
         return button
     }
 
+    func createSuggestButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("-", for: .normal)
+        button.tintColor = UIColor.black
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handlePressSuggest), for: .touchUpInside)
+        button.isEnabled = false
+        return button
+    }
+
     func initLayout() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundColor = gray10
@@ -300,10 +320,31 @@ class FTZCustomInputView : UIView {
         sideView.leadingAnchor.constraint(equalTo: keypadView.trailingAnchor, constant: 0).isActive = true
         sideView.trailingAnchor.constraint(equalTo: safeAreaView!.trailingAnchor, constant: 0).isActive = true
 
-        let autofillView = UIView()
-        sideView.addArrangedSubview(autofillView)
-        autofillView.translatesAutoresizingMaskIntoConstraints = false
-        autofillView.backgroundColor = UIColor.blue
+        let suggestView = UIView()
+        sideView.addArrangedSubview(suggestView)
+        suggestView.translatesAutoresizingMaskIntoConstraints = false
+
+        suggestButton = createSuggestButton()
+        suggestView.addSubview(suggestButton!)
+        suggestButton!.centerXAnchor.constraint(equalTo: suggestView.centerXAnchor, constant: 0).isActive = true
+        suggestButton!.centerYAnchor.constraint(equalTo: suggestView.centerYAnchor, constant: 10).isActive = true
+        suggestButton!.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        suggestLabel = UILabel()
+        suggestView.addSubview(suggestLabel!)
+        suggestLabel!.translatesAutoresizingMaskIntoConstraints = false
+        suggestLabel!.centerXAnchor.constraint(equalTo: suggestView.centerXAnchor, constant: 0).isActive = true
+        suggestLabel!.bottomAnchor.constraint(equalTo: suggestButton!.topAnchor, constant: 0).isActive = true
+        suggestLabel!.font = UIFont.systemFont(ofSize: 12)
+        suggestLabel!.textColor = gray50
+
+        unitLabel = UILabel()
+        suggestView.addSubview(unitLabel!)
+        unitLabel!.translatesAutoresizingMaskIntoConstraints = false
+        unitLabel!.leadingAnchor.constraint(equalTo: suggestButton!.trailingAnchor, constant: 0).isActive = true
+        unitLabel!.lastBaselineAnchor.constraint(equalTo: suggestButton!.lastBaselineAnchor, constant: 0).isActive = true
+        unitLabel!.isEnabled = false
+        unitLabel!.font = UIFont.boldSystemFont(ofSize: 14)
 
         let sideButtonsView = UIStackView()
         sideView.addArrangedSubview(sideButtonsView)

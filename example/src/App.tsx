@@ -27,6 +27,9 @@ export default function App() {
         onRightButtonPress={() => console.log('right', isRightButtonDisabled)}
         stepValue={2.5}
         onFocus={() => console.log('focus')}
+        suggestLabel='Target'
+        unitLabel='lbs'
+        suggestValue={15}
       />
     </View>
   );

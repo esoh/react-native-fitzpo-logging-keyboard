@@ -36,6 +36,9 @@ const TextInputWithLogger = forwardRef(({
   stepValue,
   onFocus,
   onBlur,
+  suggestLabel,
+  suggestValue,
+  unitLabel,
   ...props
 }, ref) => {
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
@@ -58,6 +61,9 @@ const TextInputWithLogger = forwardRef(({
       isRightButtonDisabled={isRightButtonDisabled ?? !onRightButtonPress}
       onLeftButtonPress={onLeftButtonPress}
       isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
+      suggestLabel={suggestLabel}
+      suggestValue={suggestValue}
+      unitLabel={unitLabel}
       onFocus={() => {
         combinedRef.current?.focus();
         if(onFocus) onFocus();

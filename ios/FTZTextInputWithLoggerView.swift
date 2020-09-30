@@ -41,6 +41,24 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
         customInputView?.decrementButton?.setTitle("-" + label!, for: .normal)
     }
 
+    @objc func setSuggestLabel(_ val: NSString) {
+        customInputView?.suggestLabel?.text = val as String
+    }
+
+    @objc func setSuggestValue(_ val: NSNumber) {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 3
+        let label = formatter.string(from: val)
+        customInputView?.suggestButton?.isEnabled = true
+        customInputView?.unitLabel?.isEnabled = true
+        customInputView?.suggestButton?.setTitle(label, for: .normal)
+    }
+
+    @objc func setUnitLabel(_ val: NSString) {
+        customInputView?.unitLabel?.text = val as String
+    }
+
     // MARK: - UITextFieldDelegate
 
     @objc var onFocus: RCTDirectEventBlock?
