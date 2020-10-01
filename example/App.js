@@ -1,50 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
-import { TextInputWithLogger } from 'fitzpo-logging-keyboard';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, View, Button } from 'react-native';
+import TextInputWithLogger from 'react-native-fitzpo-logging-keyboard';
 
-const App: () => React$Node = () => {
+export default function App() {
+  const [text, setText] = useState('test');
 
-  const [text0, setText0] = useState('2000000000')
-  const [text1, setText1] = useState('')
-  const [text2, setText2] = useState('')
-  const [text3, setText3] = useState('')
+  const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
 
-  const ref0 = useRef();
-  const ref1 = useRef();
-  const ref2 = useRef();
+  const inputRef = useRef();
+  const inputRef2 = useRef();
 
-  useEffect(() => {
-    console.log('0', text0)
-  })
-
-  /* only supports value, onChangeText */
+  console.log(text);
+  console.log(isRightButtonDisabled);
 
   return (
     <View style={styles.container}>
+      <Button title='toggle right enable' onPress={() =>
+        setIsRightButtonDisabled(val => !val)}/>
+      <Button title='focus' onPress={() => inputRef.current?.focus()}/>
       <TextInputWithLogger
-        ref={ref0}
-        style={styles.input}
-        value={text0}
-        onChangeText={setText0}
-        onLeftButtonPress={() => ref0.current?.blur()}
-        onRightButtonPress={() => ref1.current?.focus()}
-        autocompleteLabel='Previous Set 3 Target'
-        autocompleteValue={115.25}
-        unit='lbs'
+        ref={inputRef}
+        style={{ width: 120, backgroundColor: 'gray' }}
+        onChangeText={text => setText(text)}
+        value={text}
+        isRightButtonDisabled={isRightButtonDisabled}
+        onRightButtonPress={() => inputRef2.current?.focus()}
+        stepValue={2.5}
         onFocus={() => console.log('focus')}
-        onBlur={() => console.log('blur')}
+        suggestLabel='Target'
+        unitLabel='lbs'
+        suggestValue={15}
       />
       <TextInputWithLogger
-        ref={ref1}
-        style={styles.input}
-        value={text3}
-        onLeftButtonPress={() => ref0.current?.focus()}
-      />
-      <TextInput
-        ref={ref2}
-        style={styles.input}
-        value={'I AM A REGULAR TEXT INPUT'}
-        onChangeText={setText3}
+        ref={inputRef2}
+        style={{ width: 120, backgroundColor: 'gray' }}
+        onChangeText={text => setText(text)}
+        value={text}
+        stepValue={2.5}
+        onFocus={() => console.log('focus')}
+        suggestLabel='Target'
+        unitLabel='lbs'
+        onLeftButtonPress={() => inputRef.current?.focus()}
+        suggestValue={15}
       />
     </View>
   );
@@ -53,16 +50,7 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  input: {
-    minWidth: 20,
-    margin: 10,
-    borderBottomWidth: 1,
-    borderColor: 'black'
+    justifyContent: 'center',
   },
 });
-
-export default App;

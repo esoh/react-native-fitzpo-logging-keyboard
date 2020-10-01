@@ -1,15 +1,16 @@
 {
-  "name": "fitzpo-logging-keyboard",
+  "name": "react-native-fitzpo-logging-keyboard",
   "title": "Fitzpo Logging Keyboard",
-  "version": "1.0.0",
-  "description": "TODO",
+  "version": "1.0.2",
+  "description": "custom textinput for Fitzpo",
   "main": "index.js",
+  "source": "index",
   "files": [
     "README.md",
     "android",
     "index.js",
     "ios",
-    "fitzpo-logging-keyboard.podspec"
+    "react-native-fitzpo-logging-keyboard.podspec"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,13 +23,11 @@
   "keywords": [
     "react-native"
   ],
-  "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
-  },
+  "author": "esoh <sean.so.oh@gmail.com> (https://github.com/esoh)",
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
+  "homepage": "https://github.com/esoh/fitzpo-logging-keyboard#readme",
   "peerDependencies": {
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x"

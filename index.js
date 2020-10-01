@@ -1,6 +1,7 @@
-import React, { forwardRef, useState, useEffect, useRef } from 'react'
-import { requireNativeComponent, Platform, TextInput } from 'react-native'
-const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger')
+import React, { useState, forwardRef, useRef, useEffect } from 'react';
+import { requireNativeComponent, Platform, TextInput } from 'react-native';
+
+const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLogger');
 
 const useCombinedRef = (...refs) => {
   const combinedRef = useRef();
@@ -21,54 +22,55 @@ const useCombinedRef = (...refs) => {
 }
 
 const TextInputWithLogger = forwardRef(({
-  onChangeText,
   value,
+  onChangeText,
+  onLeftButtonPress,
+  isLeftButtonDisabled,
+  onRightButtonPress,
+  isRightButtonDisabled,
+  stepValue,
   onFocus,
-  ...attr
+  onBlur,
+  suggestLabel,
+  suggestValue,
+  unitLabel,
+  ...props
 }, ref) => {
+  const [mostRecentEventCount, setMostRecentEventCount] = useState(0);
+
+  const handleChange = (e) => {
+    onChangeText && onChangeText(e.nativeEvent.text);
+    setMostRecentEventCount(e.nativeEvent.eventCount);
+  };
 
   const innerRef = useRef(null)
   const combinedRef = useCombinedRef(innerRef, ref)
 
-  const [latestEventTimeStamp, setLatestEventTimeStamp] = useState(0);
-  const [innerValue, setInnerValue] = useState('');
-  const _onChangeText = (event) => {
-    if (!onChangeText || event.timeStamp < latestEventTimeStamp) return;
-    onChangeText(event.nativeEvent.text);
-    setLatestEventTimeStamp(event.timeStamp);
-  }
-
-  useEffect(() => {
-    setTimeout(() => setInnerValue(value), 50);
-  }, [value]);
-
-  if(Platform.OS === 'ios') {
-    return (
-      <FTZTextInputWithLogger
-        ref={combinedRef}
-        onChangeText={_onChangeText}
-        leftButtonEnabled={!!attr.onLeftButtonPress}
-        rightButtonEnabled={!!attr.onRightButtonPress}
-        value={innerValue}
-        onFocus={() => {
-          combinedRef.current?.focus();
-          if(!!onFocus) onFocus();
-        }}
-        {...attr}
-      />
-    )
-  } else {
-    //android is not implemented yet
-    return (
-      <TextInput
-        ref={ref}
-        onChangeText={onChangeText}
-        onFocus={onFocus}
-        value={value}
-        {...attr}
-      />
-    )
-  }
+  return (
+    <FTZTextInputWithLogger
+      ref={combinedRef}
+      onChange={e => handleChange(e)}
+      text={value}
+      stepValue={stepValue}
+      onRightButtonPress={onRightButtonPress}
+      isRightButtonDisabled={isRightButtonDisabled ?? !onRightButtonPress}
+      onLeftButtonPress={onLeftButtonPress}
+      isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
+      suggestLabel={suggestLabel}
+      suggestValue={suggestValue}
+      unitLabel={unitLabel}
+      onFocus={() => {
+        combinedRef.current?.focus();
+        if(onFocus) onFocus();
+      }}
+      onBlur={() => {
+        combinedRef.current?.blur();
+        if(onBlur) onBlur();
+      }}
+      mostRecentEventCount={mostRecentEventCount}
+      {...props}
+    />
+  );
 });
 
-export { TextInputWithLogger }
+export default Platform.OS === 'ios' ? TextInputWithLogger : TextInput

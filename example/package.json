@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "fitzpo-logging-keyboard": "link:../",
+    "android": "^0.0.8",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
@@ -19,6 +19,7 @@
     "@babel/runtime": "^7.10.2",
     "@react-native-community/eslint-config": "^1.1.0",
     "babel-jest": "^26.0.1",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7.1.0",
     "jest": "^26.0.1",
     "metro-react-native-babel-preset": "^0.59.0",
