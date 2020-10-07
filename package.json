@@ -1,7 +1,7 @@
 {
   "name": "react-native-fitzpo-logging-keyboard",
   "title": "Fitzpo Logging Keyboard",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "custom textinput for Fitzpo",
   "main": "index.js",
   "source": "index",

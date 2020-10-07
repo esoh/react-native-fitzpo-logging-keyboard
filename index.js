@@ -43,8 +43,13 @@ const TextInputWithLogger = forwardRef(({
     setMostRecentEventCount(e.nativeEvent.eventCount);
   };
 
-  const innerRef = useRef(null)
+  const innerRef = useRef(null);
   const combinedRef = useCombinedRef(innerRef, ref)
+
+  useEffect(() => {
+    // When unmounting we need to blur the input
+    return () => combinedRef.current?.blur();
+  }, [combinedRef]);
 
   return (
     <FTZTextInputWithLogger
