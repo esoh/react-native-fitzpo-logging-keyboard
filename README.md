@@ -1,5 +1,8 @@
 # react-native-fitzpo-logging-keyboard
 
+Don't run `yarn install` in the root project!! It prevents the example app from
+running correctly.
+
 ## Getting started
 
 `$ npm install react-native-fitzpo-logging-keyboard --save`
