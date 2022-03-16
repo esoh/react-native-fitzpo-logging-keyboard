@@ -8,15 +8,17 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import FTZTextInputWithLoggingKeyboard from 'react-native-fitzpo-logging-keyboard';
 
 export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆FTZTextInputWithLoggingKeyboard example☆</Text>
+        <Text style={styles.welcome}>
+          ☆FTZTextInputWithLoggingKeyboard example☆
+        </Text>
         <Text style={styles.instructions}>STATUS: loaded</Text>
         <Text style={styles.welcome}>☆☆☆</Text>
         <FTZTextInputWithLoggingKeyboard />
