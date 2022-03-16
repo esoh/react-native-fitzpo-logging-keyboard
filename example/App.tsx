@@ -19,8 +19,6 @@ export default class App extends Component<{}> {
         <Text style={styles.welcome}>
           ☆FTZTextInputWithLoggingKeyboard example☆
         </Text>
-        <Text style={styles.instructions}>STATUS: loaded</Text>
-        <Text style={styles.welcome}>☆☆☆</Text>
         <FTZTextInputWithLoggingKeyboard />
       </View>
     );

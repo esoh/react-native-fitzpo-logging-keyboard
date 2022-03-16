@@ -15,6 +15,16 @@ running correctly.
 ```javascript
 import FTZTextInputWithLoggingKeyboard from 'react-native-fitzpo-logging-keyboard';
 
-// TODO: What to do with the module?
-FTZTextInputWithLoggingKeyboard;
+export default class App extends Component<{}> {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          ☆FTZTextInputWithLoggingKeyboard example☆
+        </Text>
+        <FTZTextInputWithLoggingKeyboard />
+      </View>
+    );
+  }
+}
 ```
