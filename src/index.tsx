@@ -5,15 +5,15 @@ interface TextInputWithLoggingKeyboardProps extends TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
 
-  onLeftButtonPress: () => void;
-  onRightButtonPress: () => void;
+  onLeftButtonPress?: () => void;
+  onRightButtonPress?: () => void;
   isLeftButtonDisabled?: boolean;
   isRightButtonDisabled?: boolean;
 
   stepValue?: number;
 
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 
   suggestLabel?: string;
   suggestValue?: number;
@@ -37,15 +37,15 @@ interface FTZTextInputWithLoggerProps extends TextInputProps {
   value: string;
   onChange: (e: NativeSyntheticEvent<TextInputWithLoggingKeyboardData>) => void;
 
-  onLeftButtonPress: () => void;
-  onRightButtonPress: () => void;
+  onLeftButtonPress?: () => void;
+  onRightButtonPress?: () => void;
   isLeftButtonDisabled?: boolean;
   isRightButtonDisabled?: boolean;
 
   stepValue?: number;
 
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 
   suggestLabel?: string;
   suggestValue?: number;
