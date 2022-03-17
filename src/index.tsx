@@ -1,7 +1,64 @@
 import React, { MutableRefObject, LegacyRef, useState, forwardRef, useRef, useEffect } from 'react';
-import { requireNativeComponent, Platform, TextInput, processColor } from 'react-native';
+import { TextInputChangeEventData, NativeSyntheticEvent, ColorValue, requireNativeComponent, Platform, TextInput, processColor, TextInputProps } from 'react-native';
 
-const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLoggingKeyboard');
+interface TextInputWithLoggingKeyboardProps extends TextInputProps {
+  value: string;
+  onChangeText: (text: string) => void;
+
+  onLeftButtonPress: () => void;
+  onRightButtonPress: () => void;
+  isLeftButtonDisabled?: boolean;
+  isRightButtonDisabled?: boolean;
+
+  stepValue?: number;
+
+  onFocus: () => void;
+  onBlur: () => void;
+
+  suggestLabel?: string;
+  suggestValue?: number;
+  unitLabel?: string;
+
+  primaryColor?: ColorValue;
+  topBarBackgroundColor?: ColorValue;
+  keyboardBackgroundColor?: ColorValue;
+  textColor?: ColorValue;
+  textMutedColor?: ColorValue;
+}
+
+interface TextInputWithLoggingKeyboardData extends TextInputChangeEventData {
+  text: string;
+  eventCount: number;
+}
+
+interface TextInputWithLoggingKeyboardHandle extends TextInput {}
+
+interface FTZTextInputWithLoggerProps extends TextInputProps {
+  value: string;
+  onChange: (e: NativeSyntheticEvent<TextInputWithLoggingKeyboardData>) => void;
+
+  onLeftButtonPress: () => void;
+  onRightButtonPress: () => void;
+  isLeftButtonDisabled?: boolean;
+  isRightButtonDisabled?: boolean;
+
+  stepValue?: number;
+
+  onFocus: () => void;
+  onBlur: () => void;
+
+  suggestLabel?: string;
+  suggestValue?: number;
+  unitLabel?: string;
+
+  primaryColor?: number;
+  topBarBackgroundColor?: number;
+  keyboardBackgroundColor?: number;
+  textColor?: number;
+  textMutedColor?: number;
+}
+
+const FTZTextInputWithLogger = requireNativeComponent<FTZTextInputWithLoggerProps>('FTZTextInputWithLoggingKeyboard');
 
 function useCombinedRef<T>(
   ...refs: Array<LegacyRef<T> | MutableRefObject<T>>
@@ -25,14 +82,16 @@ function useCombinedRef<T>(
   return combinedRef;
 }
 
-const normalizeColor = color => {
+const normalizeColor = (color: ColorValue | undefined) => {
   if (!color) return undefined;
   const processed = processColor(color);
-  return ((processed << 8) | (processed >>> 24)) >>> 0;
+  if (typeof processed === 'number') {
+    return ((processed << 8) | (processed >>> 24)) >>> 0;
+  }
+  return undefined;
 }
 
-
-const TextInputWithLogger = forwardRef<any, any>(({
+const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHandle, TextInputWithLoggingKeyboardProps>(({
   value,
   onChangeText,
   onLeftButtonPress,
@@ -55,7 +114,7 @@ const TextInputWithLogger = forwardRef<any, any>(({
 }, ref) => {
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
 
-  const handleChange = (e) => {
+  const handleChange = (e: NativeSyntheticEvent<TextInputWithLoggingKeyboardData>) => {
     onChangeText && onChangeText(e.nativeEvent.text);
     setMostRecentEventCount(e.nativeEvent.eventCount);
   };
@@ -63,10 +122,9 @@ const TextInputWithLogger = forwardRef<any, any>(({
   const innerRef = useRef(null)
   const combinedRef = useCombinedRef(innerRef, ref)
 
-  console.log(normalizeColor(primaryColor))
-
   return (
     <FTZTextInputWithLogger
+      // @ts-ignore
       ref={combinedRef}
       onChange={e => handleChange(e)}
       text={value}
@@ -98,4 +156,4 @@ const TextInputWithLogger = forwardRef<any, any>(({
   );
 });
 
-export default Platform.OS === 'ios' ? TextInputWithLogger : TextInput
+export default Platform.OS === 'ios' ? TextInputWithLoggingKeyboard : TextInput
