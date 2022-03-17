@@ -19,6 +19,9 @@ Pod::Spec.new do |s|
   s.authors      = { "Your Name" => "yourname@email.com" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/github_account/react-native-fitzpo-logging-keyboard.git", :tag => "#{s.version}" }
+  s.resource_bundles = {
+    'Resources' => ['ios/**/*.xcassets']
+  }
 
   s.source_files = "ios/**/*.{h,c,cc,cpp,m,mm,swift}"
   s.requires_arc = true
