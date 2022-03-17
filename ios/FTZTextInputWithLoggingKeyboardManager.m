@@ -18,4 +18,10 @@ RCT_EXPORT_VIEW_PROPERTY(onBlur, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(suggestLabel, NSString)
 RCT_EXPORT_VIEW_PROPERTY(suggestValue, NSNumber)
 RCT_EXPORT_VIEW_PROPERTY(unitLabel, NSString)
+
+RCT_EXPORT_VIEW_PROPERTY(primaryColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(topBarBackgroundColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(keyboardBackgroundColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(textColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(textMutedColor, UIColor)
 @end

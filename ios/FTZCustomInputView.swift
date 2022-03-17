@@ -16,15 +16,17 @@ class FTZCustomInputView : UIView {
     var suggestButton: UIButton? // TODO implement with default "-" disabled
     var unitLabel: UILabel? // TODO implement with default ""
     var safeAreaView: UIView?
+    var topBarView: UIView?
     var leftButton: UIButton?
     var rightButton: UIButton?
     var decrementButton: ValuedButton?
     var incrementButton: ValuedButton?
     var bundle: Bundle
-    var primary = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
-    var gray5 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-    var gray10 = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-    var gray50 = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+    var primaryColor = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
+    var topBarBackgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    var keyboardBackgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+    var textMutedColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+    var normalButtons: Array<UIButton> = Array()
 
     init(targetTextField: UITextField) {
         target = targetTextField
@@ -120,12 +122,31 @@ class FTZCustomInputView : UIView {
         }
     }
 
+    func setPrimaryColor(val: UIColor) {
+        leftButton?.tintColor = val
+        rightButton?.tintColor = val
+        backspaceButton.tintColor = val
+        chevronDownButton.tintColor = val
+        plusMinusButton.tintColor = val
+    }
+
+    func setTopBarBackgroundColor(val: UIColor) {
+        topBarView?.backgroundColor = val
+    }
+
+    func setTextColor(val: UIColor) {
+        for button in normalButtons {
+            button.tintColor = val
+        }
+        decimalButton.tintColor = val
+    }
+
     lazy var plusMinusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus.slash.minus", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.imageView!.contentMode = .scaleAspectFit
-        button.tintColor = primary
+        button.tintColor = primaryColor
         button.addTarget(self, action: #selector(handlePressPlusMinus), for: .touchUpInside)
         return button
     }()
@@ -135,7 +156,7 @@ class FTZCustomInputView : UIView {
         button.setImage(UIImage(named: "chevron.down", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.imageView!.contentMode = .scaleAspectFit
-        button.tintColor = primary
+        button.tintColor = primaryColor
         button.addTarget(self, action: #selector(handlePressChevronDown), for: .touchUpInside)
         return button
     }()
@@ -145,7 +166,7 @@ class FTZCustomInputView : UIView {
         button.setImage(UIImage(named: "delete.left.fill", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         button.imageView!.contentMode = .scaleAspectFit
-        button.tintColor = primary
+        button.tintColor = primaryColor
         button.addTarget(self, action: #selector(handlePressBackspace), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 46).isActive = true
@@ -159,6 +180,7 @@ class FTZCustomInputView : UIView {
         button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        normalButtons.append(button)
         return button
     }()
 
@@ -167,7 +189,7 @@ class FTZCustomInputView : UIView {
         button.setImage(UIImage(named: "arrow.left", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         button.imageView!.contentMode = .scaleAspectFit
-        button.tintColor = primary
+        button.tintColor = primaryColor
         button.addTarget(self, action: #selector(handlePressPrev), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -179,7 +201,7 @@ class FTZCustomInputView : UIView {
         button.setImage(UIImage(named: "arrow.right", in: bundle, compatibleWith: nil), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         button.imageView!.contentMode = .scaleAspectFit
-        button.tintColor = primary
+        button.tintColor = primaryColor
         button.addTarget(self, action: #selector(handlePressNext), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -194,6 +216,7 @@ class FTZCustomInputView : UIView {
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        normalButtons.append(button)
         return button
     }
 
@@ -205,6 +228,7 @@ class FTZCustomInputView : UIView {
         button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        normalButtons.append(button)
         return button
     }
 
@@ -215,6 +239,7 @@ class FTZCustomInputView : UIView {
         button.addTarget(self, action: #selector(handlePressKey), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        normalButtons.append(button)
         return button
     }
 
@@ -226,36 +251,38 @@ class FTZCustomInputView : UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handlePressSuggest), for: .touchUpInside)
         button.isEnabled = false
+        normalButtons.append(button)
         return button
     }
 
     func initLayout() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        backgroundColor = gray10
+        backgroundColor = keyboardBackgroundColor
 
         safeAreaView = UIView()
         addSubview(safeAreaView!)
         safeAreaView?.translatesAutoresizingMaskIntoConstraints = false
 
-        let topbarView = UIView()
-        safeAreaView?.addSubview(topbarView)
-        topbarView.translatesAutoresizingMaskIntoConstraints = false
-        topbarView.backgroundColor = gray5
-        topbarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
-        topbarView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
-        topbarView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        topbarView.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        let topBarViewInternal = UIView()
+        topBarView = topBarViewInternal
+        safeAreaView?.addSubview(topBarViewInternal)
+        topBarViewInternal.translatesAutoresizingMaskIntoConstraints = false
+        topBarViewInternal.backgroundColor = topBarBackgroundColor
+        topBarViewInternal.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+        topBarViewInternal.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+        topBarViewInternal.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        topBarViewInternal.heightAnchor.constraint(equalToConstant: 36).isActive = true
 
-        topbarView.addSubview(plusMinusButton)
+        topBarViewInternal.addSubview(plusMinusButton)
         plusMinusButton.translatesAutoresizingMaskIntoConstraints = false
-        plusMinusButton.leadingAnchor.constraint(equalTo: topbarView.leadingAnchor, constant: 5).isActive = true
-        plusMinusButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
+        plusMinusButton.leadingAnchor.constraint(equalTo: topBarViewInternal.leadingAnchor, constant: 5).isActive = true
+        plusMinusButton.centerYAnchor.constraint(equalTo: topBarViewInternal.centerYAnchor, constant: 0).isActive = true
         plusMinusButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
 
-        topbarView.addSubview(chevronDownButton)
+        topBarViewInternal.addSubview(chevronDownButton)
         chevronDownButton.translatesAutoresizingMaskIntoConstraints = false
-        chevronDownButton.trailingAnchor.constraint(equalTo: topbarView.trailingAnchor, constant: -5).isActive = true
-        chevronDownButton.centerYAnchor.constraint(equalTo: topbarView.centerYAnchor, constant: 0).isActive = true
+        chevronDownButton.trailingAnchor.constraint(equalTo: topBarViewInternal.trailingAnchor, constant: -5).isActive = true
+        chevronDownButton.centerYAnchor.constraint(equalTo: topBarViewInternal.centerYAnchor, constant: 0).isActive = true
         chevronDownButton.heightAnchor.constraint(equalToConstant: 26).isActive = true
 
         let mainView = UIView()
@@ -263,9 +290,8 @@ class FTZCustomInputView : UIView {
         mainView.translatesAutoresizingMaskIntoConstraints = false
         mainView.leadingAnchor.constraint(equalTo: safeAreaView!.leadingAnchor, constant: 0).isActive = true
         mainView.trailingAnchor.constraint(equalTo: safeAreaView!.trailingAnchor, constant: 0).isActive = true
-        mainView.topAnchor.constraint(equalTo: topbarView.bottomAnchor, constant: 0).isActive = true
+        mainView.topAnchor.constraint(equalTo: topBarViewInternal.bottomAnchor, constant: 0).isActive = true
         mainView.bottomAnchor.constraint(equalTo: safeAreaView!.bottomAnchor, constant: 0).isActive = true
-        mainView.backgroundColor = gray10
 
         let keypadView = UIStackView()
         mainView.addSubview(keypadView)
@@ -336,7 +362,7 @@ class FTZCustomInputView : UIView {
         suggestLabel!.centerXAnchor.constraint(equalTo: suggestView.centerXAnchor, constant: 0).isActive = true
         suggestLabel!.bottomAnchor.constraint(equalTo: suggestButton!.topAnchor, constant: 0).isActive = true
         suggestLabel!.font = UIFont.systemFont(ofSize: 12)
-        suggestLabel!.textColor = gray50
+        suggestLabel!.textColor = textMutedColor
 
         unitLabel = UILabel()
         suggestView.addSubview(unitLabel!)

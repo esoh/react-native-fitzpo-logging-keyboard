@@ -32,6 +32,11 @@ export default function App() {
         suggestLabel="Target"
         unitLabel="lbs"
         suggestValue={15}
+        primaryColor="red"
+        topBarBackgroundColor="#00ff0066"
+        keyboardBackgroundColor="rgba(0, 0, 255, 1)"
+        textColor="rgb(255, 255, 0)"
+        textMutedColor="rgb(0, 255, 255)"
       />
       <TextInputWithLogger
         ref={inputRef2}

@@ -1,5 +1,5 @@
 import React, { MutableRefObject, LegacyRef, useState, forwardRef, useRef, useEffect } from 'react';
-import { requireNativeComponent, Platform, TextInput } from 'react-native';
+import { requireNativeComponent, Platform, TextInput, processColor } from 'react-native';
 
 const FTZTextInputWithLogger = requireNativeComponent('FTZTextInputWithLoggingKeyboard');
 
@@ -25,6 +25,12 @@ function useCombinedRef<T>(
   return combinedRef;
 }
 
+const normalizeColor = color => {
+  if (!color) return undefined;
+  const processed = processColor(color);
+  return ((processed << 8) | (processed >>> 24)) >>> 0;
+}
+
 
 const TextInputWithLogger = forwardRef<any, any>(({
   value,
@@ -39,6 +45,12 @@ const TextInputWithLogger = forwardRef<any, any>(({
   suggestLabel,
   suggestValue,
   unitLabel,
+
+  primaryColor,
+  topBarBackgroundColor,
+  keyboardBackgroundColor,
+  textColor,
+  textMutedColor,
   ...props
 }, ref) => {
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
@@ -50,6 +62,8 @@ const TextInputWithLogger = forwardRef<any, any>(({
 
   const innerRef = useRef(null)
   const combinedRef = useCombinedRef(innerRef, ref)
+
+  console.log(normalizeColor(primaryColor))
 
   return (
     <FTZTextInputWithLogger
@@ -73,6 +87,12 @@ const TextInputWithLogger = forwardRef<any, any>(({
         if(onBlur) onBlur();
       }}
       mostRecentEventCount={mostRecentEventCount}
+
+      primaryColor={normalizeColor(primaryColor)}
+      topBarBackgroundColor={normalizeColor(topBarBackgroundColor)}
+      keyboardBackgroundColor={normalizeColor(keyboardBackgroundColor)}
+      textColor={normalizeColor(textColor)}
+      textMutedColor={normalizeColor(textMutedColor)}
       {...props}
     />
   );

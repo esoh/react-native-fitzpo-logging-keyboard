@@ -93,6 +93,26 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
             onRightButtonPress!(nil)
         }
     }
+
+    @objc func setPrimaryColor(_ val: UIColor) {
+        customInputView?.setPrimaryColor(val: val)
+    }
+
+    @objc func setTopBarBackgroundColor(_ val: UIColor) {
+        customInputView?.setTopBarBackgroundColor(val: val)
+    }
+
+    @objc func setKeyboardBackgroundColor(_ val: UIColor) {
+        customInputView?.backgroundColor = val
+    }
+
+    @objc func setTextMutedColor(_ val: UIColor) {
+        customInputView?.suggestLabel?.textColor = val
+    }
+
+    @objc func setTextColor(_ val: UIColor) {
+        customInputView?.setTextColor(val: val)
+    }
 }
 
 @objc (FTZTextInputWithLoggingKeyboardManager)
