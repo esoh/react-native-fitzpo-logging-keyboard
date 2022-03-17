@@ -31,7 +31,7 @@ interface TextInputWithLoggingKeyboardData extends TextInputChangeEventData {
   eventCount: number;
 }
 
-interface TextInputWithLoggingKeyboardHandle extends TextInput {}
+export interface TextInputWithLoggingKeyboardHandle extends TextInput {}
 
 interface FTZTextInputWithLoggerProps extends TextInputProps {
   value: string;
