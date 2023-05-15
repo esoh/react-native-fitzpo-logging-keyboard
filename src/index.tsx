@@ -172,6 +172,51 @@ const normalizeTime = (text: string) => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}${decimalPartString}`;
 };
 
+const convertSecondsToTimeDisplayString = (numSeconds: number) => {
+  let curr = numSeconds;
+
+  let seconds = 0;
+  let minutes = 0;
+
+  seconds += curr % 60;
+  curr = Math.trunc(curr / 60);
+
+  minutes += curr % 60;
+  curr = Math.trunc(curr / 60);
+
+  const hours = curr;
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
+
+const convertTimeDisplayStringToSecondsString = (timeString: string) => {
+  if (!timeString.includes(':')) {
+    return '';
+  }
+
+  let seconds = 0;
+
+  const timeParts = timeString.split(':');
+  if (timeParts.length === 1) {
+    seconds += parseInt(timeParts[0], 10);
+    return seconds.toString();
+  } else if (timeParts.length === 2) {
+    seconds += parseInt(timeParts[0], 10) * 60;
+    seconds += parseInt(timeParts[1], 10);
+    return seconds.toString();
+  } else if (timeParts.length === 3) {
+    seconds += parseInt(timeParts[0], 10) * 60 * 60;
+    seconds += parseInt(timeParts[1], 10) * 60;
+    seconds += parseInt(timeParts[2], 10);
+    return seconds.toString();
+  }
+
+  return '';
+};
+
 const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHandle, TextInputWithLoggingKeyboardProps>(({
   value,
   onChangeText,
@@ -205,6 +250,35 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
 
   const innerRef = useRef(null)
   const combinedRef = useCombinedRef(innerRef, ref)
+
+  const valueRef = useRef<typeof value>(value);
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+
+  useEffect(() => {
+    if (valueRef.current === '') {
+      return;
+    }
+
+    if (shouldDisplayAsTime && !valueRef.current.includes(':')) {
+      const v = parseFloat(valueRef.current);
+      if (!isNaN(v)) {
+        const newVal = convertSecondsToTimeDisplayString(Math.trunc(v * 60));
+        onChangeText(newVal);
+      } else {
+        onChangeText('');
+      }
+    } else if (!shouldDisplayAsTime && valueRef.current.includes(':')) {
+      const seconds = parseInt(convertTimeDisplayStringToSecondsString(valueRef.current), 10);
+      if (!isNaN(seconds)) {
+        const newVal = parseFloat((seconds / 60).toFixed(2));
+        onChangeText(newVal.toString());
+      } else {
+        onChangeText('');
+      }
+    }
+  }, [shouldDisplayAsTime]);
 
   return (
     <FTZTextInputWithLogger
