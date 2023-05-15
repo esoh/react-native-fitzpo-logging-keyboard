@@ -24,6 +24,8 @@ interface TextInputWithLoggingKeyboardProps extends TextInputProps {
   keyboardBackgroundColor?: ColorValue;
   textColor?: ColorValue;
   textMutedColor?: ColorValue;
+
+  shouldDisplayAsTime?: boolean;
 }
 
 interface TextInputWithLoggingKeyboardData extends TextInputChangeEventData {
@@ -91,6 +93,85 @@ const normalizeColor = (color: ColorValue | undefined) => {
   return undefined;
 }
 
+/** @param text - any number with colons in it */
+const formatAsTime = (text: string) => {
+  if (!text) {
+    return text;
+  }
+
+  /**
+   * Our goal is to take cleanedText
+   * and add in colons as appropriate.
+   * (we add in extra 0s up to the minute mark)
+   *
+   * 1        => 0:01
+   * 10       => 0:10
+   * .        => 0:00.
+   * .7       => 0:00.7
+   * 999.07   => 9:99.07
+   * 0335.07  => 3:35.07
+   *
+   * Note: We know that 9:99.07 is not a valid time.
+   * We'll correct this during the onBlur function.
+   */
+  const cleanedText = text.replaceAll(':', '');
+  const partsOfNumber = cleanedText.split('.');
+  const decimalPart = partsOfNumber[1] !== undefined ? '.' + partsOfNumber[1] : '';
+  let integerPart = partsOfNumber[0] !== undefined ? partsOfNumber[0] : '';
+  integerPart = isNaN(parseInt(integerPart, 10)) ? integerPart : parseInt(integerPart, 10).toString();
+  integerPart = integerPart.padStart(3, '0');
+  integerPart = integerPart.slice(0, integerPart.length - 2) + ':' + integerPart.slice(integerPart.length - 2);
+  // yxx:xx => y:xx:xx
+  if (integerPart.length >= 6) {
+    integerPart = integerPart.slice(0, integerPart.length - 5) + ':' + integerPart.slice(integerPart.length - 5);
+  }
+  return integerPart + decimalPart;
+};
+
+const normalizeTime = (text: string) => {
+  if (text === '') {
+    return '';
+  }
+
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  const decimalSplits = text.split('.');
+  const decimalPartString = decimalSplits[1] === undefined ? '' : '.' + decimalSplits[1];
+
+  if (decimalSplits[0] === undefined || decimalSplits[0] === '') {
+    return '0:00' + decimalPartString;
+  }
+
+  const timeParts = decimalSplits[0].split(':');
+  if (timeParts.length === 1) {
+    seconds += parseInt(timeParts[0], 10);
+  } else if (timeParts.length === 2) {
+    minutes += parseInt(timeParts[0], 10)
+    seconds += parseInt(timeParts[1], 10)
+  } else if (timeParts.length === 3) {
+    hours += parseInt(timeParts[0], 10);
+    minutes += parseInt(timeParts[1], 10)
+    seconds += parseInt(timeParts[2], 10)
+  }
+
+  if (seconds > 60) {
+    minutes += Math.trunc(seconds / 60);
+    seconds %= 60;
+  }
+
+  if (minutes > 60) {
+    hours += Math.trunc(minutes / 60);
+    minutes %= 60;
+  }
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}${decimalPartString}`;
+  }
+  return `${minutes}:${seconds.toString().padStart(2, '0')}${decimalPartString}`;
+};
+
 const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHandle, TextInputWithLoggingKeyboardProps>(({
   value,
   onChangeText,
@@ -104,6 +185,7 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
   suggestLabel,
   suggestValue,
   unitLabel,
+  shouldDisplayAsTime,
 
   primaryColor,
   topBarBackgroundColor,
@@ -115,7 +197,9 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
   const [mostRecentEventCount, setMostRecentEventCount] = useState<number>(0);
 
   const handleChange = (e: NativeSyntheticEvent<TextInputWithLoggingKeyboardData>) => {
-    onChangeText && onChangeText(e.nativeEvent.text);
+    const text = e.nativeEvent.text;
+    const formattedText = shouldDisplayAsTime ? formatAsTime(text) : text;
+    onChangeText(formattedText);
     setMostRecentEventCount(e.nativeEvent.eventCount);
   };
 
@@ -142,6 +226,9 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
       }}
       onBlur={() => {
         combinedRef.current?.blur();
+        if (shouldDisplayAsTime) {
+          onChangeText(normalizeTime(value));
+        }
         if(onBlur) onBlur();
       }}
       mostRecentEventCount={mostRecentEventCount}
