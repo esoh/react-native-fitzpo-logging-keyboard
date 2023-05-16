@@ -16,7 +16,7 @@ interface TextInputWithLoggingKeyboardProps extends TextInputProps {
   onBlur?: () => void;
 
   suggestLabel?: string;
-  suggestValue?: string;
+  suggestValue?: string | number;
   unitLabel?: string;
 
   primaryColor?: ColorValue;
@@ -50,7 +50,7 @@ interface FTZTextInputWithLoggerProps extends TextInputProps {
   onBlur?: () => void;
 
   suggestLabel?: string;
-  suggestValue?: string;
+  suggestValue?: string | number;
   unitLabel?: string;
 
   primaryColor?: number;
@@ -218,7 +218,7 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
       onLeftButtonPress={onLeftButtonPress}
       isLeftButtonDisabled={isLeftButtonDisabled ?? !onLeftButtonPress}
       suggestLabel={suggestLabel}
-      suggestValue={suggestValue}
+      suggestValue={typeof suggestValue === 'number' ? suggestValue.toString() : suggestValue}
       unitLabel={unitLabel}
       onFocus={() => {
         combinedRef.current?.focus();
