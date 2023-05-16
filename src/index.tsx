@@ -156,12 +156,12 @@ const normalizeTime = (text: string) => {
     seconds += parseInt(timeParts[2], 10)
   }
 
-  if (seconds > 60) {
+  if (seconds >= 60) {
     minutes += Math.trunc(seconds / 60);
     seconds %= 60;
   }
 
-  if (minutes > 60) {
+  if (minutes >= 60) {
     hours += Math.trunc(minutes / 60);
     minutes %= 60;
   }
