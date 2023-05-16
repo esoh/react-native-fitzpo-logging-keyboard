@@ -2,10 +2,8 @@ protocol FTZCustomInputViewDelegate {
     // protocol definition goes here
     func leftButtonPressed()
     func rightButtonPressed()
-}
-
-class ValuedButton: UIButton {
-    var value: Double = 0
+    func incrementButtonPressed()
+    func decrementButtonPressed()
 }
 
 class FTZCustomInputView : UIView {
@@ -19,8 +17,8 @@ class FTZCustomInputView : UIView {
     var topBarView: UIView?
     var leftButton: UIButton?
     var rightButton: UIButton?
-    var decrementButton: ValuedButton?
-    var incrementButton: ValuedButton?
+    var decrementButton: UIButton?
+    var incrementButton: UIButton?
     var bundle: Bundle
     var primaryColor = UIColor(red: 0.29, green: 0.455, blue: 0.863, alpha: 1)
     var topBarBackgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
@@ -103,11 +101,12 @@ class FTZCustomInputView : UIView {
         return formatter.string(from: NSNumber(value: val))!
     }
 
-    @objc func handlePressStep(sender: ValuedButton) {
-        let number = getNumberFromText(text: target?.text) ?? 0;
+    @objc func handlePressIncrement() {
+        delegate?.incrementButtonPressed()
+    }
 
-        target?.text = formatAsString(number + sender.value)
-        target?.sendActions(for: .editingChanged)
+    @objc func handlePressDecrement() {
+        delegate?.decrementButtonPressed()
     }
 
     @objc func handlePressBackspace() {
@@ -208,26 +207,26 @@ class FTZCustomInputView : UIView {
         return button
     }
 
-    func createDecrementButton() -> ValuedButton {
-        let button = ValuedButton(type: .system)
-        button.value = -1
-        button.setTitle("-1", for: .normal)
+    func createDecrementButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("?", for: .normal)
         button.tintColor = UIColor.black
-        button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlePressDecrement), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         normalButtons.append(button)
         return button
     }
 
-    func createIncrementButton() -> ValuedButton {
-        let button = ValuedButton(type: .system)
-        button.value = 1
-        button.setTitle("+1", for: .normal)
+    func createIncrementButton() -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle("?", for: .normal)
         button.tintColor = UIColor.black
-        button.addTarget(self, action: #selector(handlePressStep), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlePressIncrement), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         normalButtons.append(button)
         return button
     }

@@ -4,6 +4,7 @@ import TextInputWithLogger from 'react-native-fitzpo-logging-keyboard';
 
 export default function App() {
   const [text, setText] = useState('test');
+  const [text3, setText3] = useState('test3');
 
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
 
@@ -49,6 +50,18 @@ export default function App() {
         unitLabel="lbs"
         onLeftButtonPress={() => inputRef.current?.focus()}
         suggestValue={15}
+      />
+      <TextInputWithLogger
+        shouldDisplayAsTime
+        style={{width: 120, backgroundColor: 'gray'}}
+        onChangeText={text => setText3(text)}
+        value={text3}
+        stepValue={2}
+        onFocus={() => console.log('focus')}
+        suggestLabel="Target"
+        unitLabel="lbs"
+        onLeftButtonPress={() => inputRef.current?.focus()}
+        suggestValue="6:00"
       />
     </View>
   );

@@ -10,7 +10,7 @@ interface TextInputWithLoggingKeyboardProps extends TextInputProps {
   isLeftButtonDisabled?: boolean;
   isRightButtonDisabled?: boolean;
 
-  stepValue?: number;
+  stepValue: number;
 
   onFocus?: () => void;
   onBlur?: () => void;
@@ -44,7 +44,7 @@ interface FTZTextInputWithLoggerProps extends TextInputProps {
   isLeftButtonDisabled?: boolean;
   isRightButtonDisabled?: boolean;
 
-  stepValue?: number;
+  stepValue: number;
 
   onFocus?: () => void;
   onBlur?: () => void;
@@ -172,6 +172,53 @@ const normalizeTime = (text: string) => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}${decimalPartString}`;
 };
 
+const secondsToDurationString = (seconds: number) => {
+  let h = 0;
+  let m = 0;
+  let s = 0;
+
+  let curr = seconds;
+  s += Math.trunc(curr % 60);
+  curr = Math.trunc(curr / 60);
+  m += curr % 60;
+  curr = Math.trunc(curr / 60);
+  h += curr;
+
+  const decimalPart = seconds.toString().split('.')[1];
+  const decimalPartString = decimalPart == null ? '' : '.' + decimalPart;
+
+  const paddedSeconds = s.toString().padStart(2, '0');
+  if (h) {
+    return `${h}:${m.toString().padStart(2, '0')}:${paddedSeconds}}${decimalPartString}`;
+  }
+  return `${m}:${paddedSeconds}${decimalPartString}`;
+};
+
+const durationStringToSeconds = (durationString: string) => {
+  if (!durationString.includes(':')) {
+    return parseFloat(durationString);
+  }
+
+  let seconds = 0;
+
+  const timeParts = durationString.split(':');
+  if (timeParts.length === 1) {
+    seconds += parseFloat(timeParts[0]);
+    return seconds;
+  } else if (timeParts.length === 2) {
+    seconds += parseInt(timeParts[0], 10) * 60;
+    seconds += parseFloat(timeParts[1]);
+    return seconds;
+  } else if (timeParts.length === 3) {
+    seconds += parseInt(timeParts[0], 10) * 60 * 60;
+    seconds += parseInt(timeParts[1], 10) * 60;
+    seconds += parseFloat(timeParts[2]);
+    return seconds;
+  }
+
+  return NaN;
+};
+
 const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHandle, TextInputWithLoggingKeyboardProps>(({
   value,
   onChangeText,
@@ -206,13 +253,39 @@ const TextInputWithLoggingKeyboard = forwardRef<TextInputWithLoggingKeyboardHand
   const innerRef = useRef(null)
   const combinedRef = useCombinedRef(innerRef, ref)
 
+  const stepValueLabel = shouldDisplayAsTime ? secondsToDurationString(stepValue) : stepValue;
+  const incrementLabel = `+${stepValueLabel}`;
+  const decrementLabel = `-${stepValueLabel}`;
+  const handleAddValue = (addValue: number) => {
+    if (value.includes(':') || shouldDisplayAsTime) {
+      let totalSeconds = durationStringToSeconds(value);
+      if (isNaN(totalSeconds)) {
+        totalSeconds = 0;
+      }
+      onChangeText(secondsToDurationString(Math.max(totalSeconds + addValue, 0)));
+    } else {
+      const existingValue = isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+      const newValue = existingValue + addValue;
+      onChangeText(newValue.toString());
+    }
+  };
+  const handlePressIncrement = () => {
+    handleAddValue(stepValue);
+  };
+  const handlePressDecrement = () => {
+    handleAddValue(-stepValue);
+  };
+
   return (
     <FTZTextInputWithLogger
       // @ts-ignore
       ref={combinedRef}
       onChange={e => handleChange(e)}
       text={value}
-      stepValue={stepValue}
+      incrementLabel={incrementLabel}
+      onPressIncrement={handlePressIncrement}
+      decrementLabel={decrementLabel}
+      onPressDecrement={handlePressDecrement}
       onRightButtonPress={onRightButtonPress}
       isRightButtonDisabled={isRightButtonDisabled ?? !onRightButtonPress}
       onLeftButtonPress={onLeftButtonPress}

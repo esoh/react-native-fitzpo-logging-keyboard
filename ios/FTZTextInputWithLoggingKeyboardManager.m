@@ -6,11 +6,13 @@ RCT_EXPORT_VIEW_PROPERTY(mostRecentEventCount, NSInteger)
 RCT_EXPORT_SHADOW_PROPERTY(text, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(onLeftButtonPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onPressIncrement, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onPressDecrement, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(incrementLabel, NSString)
+RCT_EXPORT_VIEW_PROPERTY(decrementLabel, NSString)
 RCT_EXPORT_VIEW_PROPERTY(isLeftButtonDisabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(onRightButtonPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(isRightButtonDisabled, BOOL)
-
-RCT_EXPORT_VIEW_PROPERTY(stepValue, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(onFocus, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onBlur, RCTBubblingEventBlock)

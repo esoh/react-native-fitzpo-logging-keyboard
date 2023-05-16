@@ -26,19 +26,12 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
         customInputView?.rightButton?.isEnabled = !val.boolValue
     }
 
-    @objc func setStepValue(_ val: NSNumber) {
-        let stepValue = val.doubleValue
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 3
-        let label = formatter.string(from: val)
-        if (label == nil) {
-            return
-        }
-        customInputView?.incrementButton?.value = stepValue;
-        customInputView?.incrementButton?.setTitle("+" + label!, for: .normal)
-        customInputView?.decrementButton?.value = -1 * stepValue;
-        customInputView?.decrementButton?.setTitle("-" + label!, for: .normal)
+    @objc func setIncrementLabel(_ val: NSString) {
+        customInputView?.incrementButton?.setTitle(val as String, for: .normal)
+    }
+
+    @objc func setDecrementLabel(_ val: NSString) {
+        customInputView?.decrementButton?.setTitle(val as String, for: .normal)
     }
 
     @objc func setSuggestLabel(_ val: NSString) {
@@ -88,6 +81,16 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
         if onRightButtonPress != nil {
             onRightButtonPress!(nil)
         }
+    }
+
+    @objc var onPressIncrement: RCTDirectEventBlock?
+    func incrementButtonPressed() {
+        onPressIncrement!(nil)
+    }
+
+    @objc var onPressDecrement: RCTDirectEventBlock?
+    func decrementButtonPressed() {
+        onPressDecrement!(nil)
     }
 
     @objc func setPrimaryColor(_ val: UIColor) {

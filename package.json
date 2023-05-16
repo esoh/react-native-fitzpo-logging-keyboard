@@ -1,7 +1,7 @@
 {
   "name": "react-native-fitzpo-logging-keyboard",
   "title": "TextInput with custom keyboard",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "TODO",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
