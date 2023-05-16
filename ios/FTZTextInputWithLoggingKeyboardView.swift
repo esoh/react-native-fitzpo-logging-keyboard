@@ -45,14 +45,10 @@ UITextFieldDelegate, FTZCustomInputViewDelegate {
         customInputView?.suggestLabel?.text = val as String
     }
 
-    @objc func setSuggestValue(_ val: NSNumber) {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 3
-        let label = formatter.string(from: val)
+    @objc func setSuggestValue(_ val: NSString) {
         customInputView?.suggestButton?.isEnabled = true
         customInputView?.unitLabel?.isEnabled = true
-        customInputView?.suggestButton?.setTitle(label, for: .normal)
+        customInputView?.suggestButton?.setTitle(val as String, for: .normal)
     }
 
     @objc func setUnitLabel(_ val: NSString) {
