@@ -16,7 +16,7 @@ interface TextInputWithLoggingKeyboardProps extends TextInputProps {
   onBlur?: () => void;
 
   suggestLabel?: string;
-  suggestValue?: number;
+  suggestValue?: string;
   unitLabel?: string;
 
   primaryColor?: ColorValue;
@@ -50,7 +50,7 @@ interface FTZTextInputWithLoggerProps extends TextInputProps {
   onBlur?: () => void;
 
   suggestLabel?: string;
-  suggestValue?: number;
+  suggestValue?: string;
   unitLabel?: string;
 
   primaryColor?: number;
